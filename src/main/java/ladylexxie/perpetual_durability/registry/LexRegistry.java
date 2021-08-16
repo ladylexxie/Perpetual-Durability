@@ -20,13 +20,7 @@ public class LexRegistry {
 
     private static final EnchantmentType DESTRUCTIBLE = EnchantmentType.create("DESTRUCTIBLE", item -> item.isDamageable(null));
 
-    public static final RegistryObject<Enchantment> PERPETUAL = ENCHANTMENTS.register("perpetual",
-            () -> new ModdedEnchant(Enchantment.Rarity.COMMON, DESTRUCTIBLE, EquipmentSlotType.MAINHAND)
-                    .setTreasure(false)
-                    .setCanBeVillagerTrade(false)
-                    .setCanGenerateInLoot(false)
-                    .setCanEnchantOnBooks(false)
-    );
+    public static final RegistryObject<Enchantment> PERPETUAL = ENCHANTMENTS.register("perpetual",() -> new ModdedEnchant(Enchantment.Rarity.COMMON, DESTRUCTIBLE, EquipmentSlotType.MAINHAND));
 
     public static void init(){
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -34,5 +28,5 @@ public class LexRegistry {
         ENCHANTMENTS.register(eventBus);
     }
 
-    public static final RegistryObject<IRecipeSerializer<?>> APPLY_INDESTRUCTIBLE = RECIPES.register("apply_perpetual", () -> new SpecialRecipeSerializer<>(ApplyPerpetual::new));
+    public static final RegistryObject<IRecipeSerializer<?>> APPLY_PERPETUAL = RECIPES.register("apply_perpetual", () -> new SpecialRecipeSerializer<>(ApplyPerpetual::new));
 }

@@ -51,6 +51,6 @@ public class ApplyPerpetual extends SmithingRecipe {
 
     @Override
     public IRecipeSerializer<?> getSerializer() {
-        return LexRegistry.APPLY_INDESTRUCTIBLE.get();
+        return LexRegistry.APPLY_PERPETUAL.get();
     }
 }

@@ -27,10 +27,11 @@ public class ApplyPerpetual {
         String configItem = EnchantConfig.PERPETUAL_ITEM.get();
         Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(configItem));
 
-        Ingredient ingredient = Ingredient.of(item);
+        Ingredient ingredient = Ingredient.of(item.getDefaultInstance());
 
         list.forEach(itemList -> {
-            ResourceLocation id = new ResourceLocation(PerpetualDurability.MOD_ID, "jei.apply_perpetual." + itemList.getRegistryName());
+            ResourceLocation itemID = ForgeRegistries.ITEMS.getKey(itemList);
+            ResourceLocation id = new ResourceLocation(PerpetualDurability.MOD_ID, "jei.apply_perpetual." + itemID.getNamespace() + "." + itemID.getPath());
             ItemStack output = new ItemStack(itemList);
             output.enchant(LexRegistry.PERPETUAL.get(), 1);
             SmithingRecipe recipe = new SmithingRecipe(id, Ingredient.of(itemList), ingredient, output);
