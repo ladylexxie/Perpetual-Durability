@@ -23,15 +23,15 @@ repositories {
     }
 }
 
-version = '1.0'
-group = 'ladylexxie.perpetual_durability'
-archivesBaseName = 'perpetual_durability'
+version = "${mod_version}"
+group = "ladylexxie.${modid}"
+archivesBaseName = "${modid}"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: '1.16.5'
+    mappings channel: 'official', version: "${mc_version}"
     runs {
         client {
             workingDirectory project.file('run')
@@ -75,10 +75,10 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.2'
+    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
-    compileOnly fg.deobf("mezz.jei:jei-1.16.5:7.7.1.118:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:7.7.1.118")
+    compileOnly fg.deobf("mezz.jei:jei-1.16.5:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:${jei_version}")
 }
 
 jar {
@@ -86,7 +86,7 @@ jar {
         attributes([
             "Specification-Title": "Perpetual Durability",
             "Specification-Vendor": "Lady Lexxie",
-            "Specification-Version": "1.0.0",
+            "Specification-Version": "${mod_version}",
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"Lady Lexxie",
