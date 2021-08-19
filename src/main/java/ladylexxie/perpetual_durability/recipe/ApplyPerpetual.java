@@ -2,7 +2,7 @@ package ladylexxie.perpetual_durability.recipe;
 
 import ladylexxie.perpetual_durability.config.EnchantConfig;
 import ladylexxie.perpetual_durability.registry.LexRegistry;
-import ladylexxie.perpetual_durability.util.ItemStackUtils;
+import ladylexxie.perpetual_durability.util.ModdedEnchantmentHelper;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -24,7 +24,7 @@ public class ApplyPerpetual extends SmithingRecipe {
         ItemStack addition = inventory.getItem(1);
         String id = EnchantConfig.PERPETUAL_ITEM.get();
 
-        if(input.isDamageableItem() && !ItemStackUtils.hasEnchant(input, LexRegistry.PERPETUAL.get())){
+        if(input.isDamageableItem() && !ModdedEnchantmentHelper.hasEnchant(input, LexRegistry.PERPETUAL.get())){
             return Objects.equals(Objects.requireNonNull(addition.getItem().getRegistryName()).toString(), id);
         }
         return false;

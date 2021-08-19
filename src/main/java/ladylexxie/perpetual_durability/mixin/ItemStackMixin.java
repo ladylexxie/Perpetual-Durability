@@ -1,7 +1,7 @@
 package ladylexxie.perpetual_durability.mixin;
 
 import ladylexxie.perpetual_durability.registry.LexRegistry;
-import ladylexxie.perpetual_durability.util.ItemStackUtils;
+import ladylexxie.perpetual_durability.util.ModdedEnchantmentHelper;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,7 +19,7 @@ public abstract class ItemStackMixin {
 
     @Inject(at = @At(value = "HEAD"), method = "hurt", cancellable = true)
     private void handleIndestructibleEnchantment(int damage, Random rand, ServerPlayerEntity player, CallbackInfoReturnable<Boolean> info){
-        if(ItemStackUtils.hasEnchant(this.copy(), LexRegistry.PERPETUAL.get())){
+        if(ModdedEnchantmentHelper.hasEnchant(this.copy(), LexRegistry.PERPETUAL.get())){
             info.setReturnValue(false);
         }
     }

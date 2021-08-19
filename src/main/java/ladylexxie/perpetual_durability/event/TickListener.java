@@ -1,7 +1,7 @@
 package ladylexxie.perpetual_durability.event;
 
 import ladylexxie.perpetual_durability.registry.LexRegistry;
-import ladylexxie.perpetual_durability.util.ItemStackUtils;
+import ladylexxie.perpetual_durability.util.ModdedEnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
@@ -17,7 +17,7 @@ public class TickListener {
         for(int i = 0; i < player.inventory.getContainerSize(); i++){
             ItemStack stack = player.inventory.getItem(i);
 
-            if(stack != ItemStack.EMPTY && stack.isDamageableItem() && stack.isDamaged() && ItemStackUtils.hasEnchant(stack, LexRegistry.PERPETUAL.get())) {
+            if(stack != ItemStack.EMPTY && stack.isDamageableItem() && stack.isDamaged() && ModdedEnchantmentHelper.hasEnchant(stack, LexRegistry.PERPETUAL.get())) {
                 stack.setDamageValue(0);
             }
         }

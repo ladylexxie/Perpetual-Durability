@@ -4,7 +4,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
 
-public class ItemStackUtils {
+public class ModdedEnchantmentHelper {
     public static boolean hasEnchant(ItemStack item, Enchantment enchantment){
         for(Enchantment itemEnchantment : EnchantmentHelper.getEnchantments(item).keySet()){
             if(itemEnchantment == enchantment) return true;
