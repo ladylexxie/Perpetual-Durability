@@ -1,39 +1,46 @@
 package ladylexxie.perpetual_durability.recipe;
 
+import ladylexxie.perpetual_durability.PerpetualDurability;
 import ladylexxie.perpetual_durability.config.EnchantConfig;
 import ladylexxie.perpetual_durability.registry.LexRegistry;
 import ladylexxie.perpetual_durability.util.ModdedEnchantmentHelper;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.SmithingRecipe;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.UpgradeRecipe;
+import net.minecraft.world.level.Level;
 
 import java.util.Objects;
 
-public class ApplyPerpetual extends SmithingRecipe {
+public class ApplyPerpetual extends UpgradeRecipe {
     public ApplyPerpetual(ResourceLocation recipeID){
         super(recipeID, Ingredient.EMPTY, Ingredient.EMPTY, ItemStack.EMPTY);
     }
 
     @Override
-    public boolean matches(IInventory inventory, World world){
+    public boolean matches(Container inventory, Level world){
         ItemStack input = inventory.getItem(0);
         ItemStack addition = inventory.getItem(1);
         String id = EnchantConfig.PERPETUAL_ITEM.get();
 
         if(input.isDamageableItem() && !ModdedEnchantmentHelper.hasEnchant(input, LexRegistry.PERPETUAL.get())){
+
+            PerpetualDurability.LOGGER.debug(Objects.equals(Objects.requireNonNull(addition.getItem().getRegistryName()).toString(), id));
             return Objects.equals(Objects.requireNonNull(addition.getItem().getRegistryName()).toString(), id);
         }
+
+        PerpetualDurability.LOGGER.debug("false");
         return false;
     }
 
     @Override
-    public ItemStack assemble(IInventory inventory){
+    public ItemStack assemble(Container inventory){
         ItemStack stack = inventory.getItem(0).copy();
         stack.enchant(LexRegistry.PERPETUAL.get(), 1);
+
+        PerpetualDurability.LOGGER.debug(stack);
 
         return stack;
     }
@@ -50,7 +57,7 @@ public class ApplyPerpetual extends SmithingRecipe {
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return LexRegistry.APPLY_PERPETUAL.get();
     }
 }
