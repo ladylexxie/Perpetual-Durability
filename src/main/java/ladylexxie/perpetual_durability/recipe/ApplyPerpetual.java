@@ -27,8 +27,8 @@ public class ApplyPerpetual extends UpgradeRecipe {
 
         if(input.isDamageableItem() && !ModdedEnchantmentHelper.hasEnchant(input, LexRegistry.PERPETUAL.get())){
 
-            PerpetualDurability.LOGGER.debug(Objects.equals(Objects.requireNonNull(addition.getItem().getRegistryName()).toString(), id));
-            return Objects.equals(Objects.requireNonNull(addition.getItem().getRegistryName()).toString(), id);
+            PerpetualDurability.LOGGER.debug(addition.getItem().getRegistryName().toString().equals(id));
+            return addition.getItem().getRegistryName().toString().equals(id);
         }
 
         PerpetualDurability.LOGGER.debug("false");
