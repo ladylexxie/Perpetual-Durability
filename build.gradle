@@ -1,15 +1,17 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://maven.parchmentmc.org' }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.parchmentmc:librarian:1.+'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'eclipse'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'maven-publish'
 
 repositories {
@@ -19,7 +21,7 @@ repositories {
     }
     maven {
         name = "ModMaven"
-        url = "https://modmaven.k-4u.nl"
+        url = "https://modmaven.dev"
     }
 }
 
@@ -27,11 +29,11 @@ version = "${mod_version}"
 group = "ladylexxie.${modid}"
 archivesBaseName = "${modid}"
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: "${mc_version}"
+    mappings channel: 'parchment', version: '2021.12.19-1.18.1'
     runs {
         client {
             workingDirectory project.file('run')
@@ -77,8 +79,8 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
-    compileOnly fg.deobf("mezz.jei:jei-1.16.5:${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-1.18:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.18:${jei_version}")
 }
 
 jar {
