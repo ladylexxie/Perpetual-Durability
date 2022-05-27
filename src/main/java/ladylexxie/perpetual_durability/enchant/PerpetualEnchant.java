@@ -34,9 +34,4 @@ public class PerpetualEnchant extends Enchantment {
     public boolean canApplyAtEnchantingTable(ItemStack stack){
         return false;
     }
-
-    @Override
-    public boolean isCurse() {
-        return true;
-    }
 }
