@@ -12,9 +12,13 @@ import net.minecraft.world.item.crafting.UpgradeRecipe;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Objects;
 
 public class ApplyPerpetual extends UpgradeRecipe {
+    private final List<String> modBlacklist = (List<String>) EnchantConfig.MOD_BLACKLIST.get();
+    private final List<String> itemBlacklist = (List<String>) EnchantConfig.ITEM_BLACKLIST.get();
+
     public ApplyPerpetual(ResourceLocation recipeID){
         super(recipeID, Ingredient.EMPTY, Ingredient.EMPTY, ItemStack.EMPTY);
     }
@@ -26,6 +30,8 @@ public class ApplyPerpetual extends UpgradeRecipe {
         String id = EnchantConfig.PERPETUAL_ITEM.get();
 
         if(input.isDamageableItem() && !ModdedEnchantmentHelper.hasEnchant(input, LexRegistry.PERPETUAL.get())){
+            if(modBlacklist.contains(input.getItem().getRegistryName().getNamespace())) return false;
+            if(itemBlacklist.contains(input.getItem().getRegistryName().toString())) return false;
             return Objects.equals(Objects.requireNonNull(addition.getItem().getRegistryName()).toString(), id);
         }
         return false;
