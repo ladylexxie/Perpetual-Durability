@@ -10,6 +10,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.UpgradeRecipe;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -30,9 +31,9 @@ public class ApplyPerpetual extends UpgradeRecipe {
         String id = EnchantConfig.PERPETUAL_ITEM.get();
 
         if(input.isDamageableItem() && !ModdedEnchantmentHelper.hasEnchant(input, LexRegistry.PERPETUAL.get())){
-            if(modBlacklist.contains(input.getItem().getRegistryName().getNamespace())) return false;
-            if(itemBlacklist.contains(input.getItem().getRegistryName().toString())) return false;
-            return Objects.equals(Objects.requireNonNull(addition.getItem().getRegistryName()).toString(), id);
+            if(modBlacklist.contains(ForgeRegistries.ITEMS.getKey(input.getItem()).getNamespace())) return false;
+            if(itemBlacklist.contains(ForgeRegistries.ITEMS.getKey(input.getItem()).getNamespace())) return false;
+            return Objects.equals(ForgeRegistries.ITEMS.getKey(addition.getItem()).getNamespace(), id);
         }
         return false;
     }
@@ -53,7 +54,7 @@ public class ApplyPerpetual extends UpgradeRecipe {
     @Override
     public boolean isAdditionIngredient(ItemStack addition) {
         String id = EnchantConfig.PERPETUAL_ITEM.get();
-        return Objects.equals(Objects.requireNonNull(addition.getItem().getRegistryName()).toString(), id);
+        return Objects.equals(ForgeRegistries.ITEMS.getKey(addition.getItem()), id);
     }
 
     @Override
