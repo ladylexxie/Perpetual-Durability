@@ -21,15 +21,7 @@ public abstract class ItemStackMixin {
     @Inject(at = @At(value = "HEAD"), method = "hurt", cancellable = true, remap = false)
     private void handlePerpetualEnchantment(int damage, Random rand, ServerPlayerEntity player, CallbackInfoReturnable<Boolean> info){
         if(ModdedEnchantmentHelper.hasEnchant(this.copy(), LexRegistry.PERPETUAL.get())){
-            LogManager.getLogger().info("coite");
             info.setReturnValue(false);
         }
     }
-
-//    @Inject(at = @At(value = "HEAD"), method = "isDamageableItem", cancellable = true)
-//    private void handlePerpetualSomethingEnchantment(CallbackInfoReturnable<Boolean> info){
-//        if(ModdedEnchantmentHelper.hasEnchant(this.copy(), LexRegistry.PERPETUAL.get())){
-//            info.setReturnValue(false);
-//        }
-//    }
 }

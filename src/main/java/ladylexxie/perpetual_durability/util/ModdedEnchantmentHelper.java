@@ -9,11 +9,9 @@ public class ModdedEnchantmentHelper {
     public static boolean hasEnchant(ItemStack item, Enchantment enchantment) {
         for (Enchantment itemEnchantment : EnchantmentHelper.getEnchantments(item).keySet()) {
             if (itemEnchantment == enchantment) {
-                LogManager.getLogger().info("true");
                 return true;
             }
         }
-        LogManager.getLogger().info("false");
         return false;
     }
 }
