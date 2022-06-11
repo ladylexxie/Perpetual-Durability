@@ -1,12 +1,11 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7.+'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
@@ -18,9 +17,10 @@ apply plugin: 'org.spongepowered.mixin'
 mixin {
     add sourceSets.main, "${modid}.refmap.json"
     config "${modid}.mixins.json"
+    debug.export = true
 }
 
-version = "${mod_version}"
+version = "${mc_version}-${mod_version}"
 group = "ladylexxie.${modid}"
 archivesBaseName = "${modid}"
 
@@ -35,8 +35,7 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
             property 'mixin.env.remapRefMap', 'true'
-            arg "-mixin.config=perpetual_durability.mixins.json"
-            jvmArg "-Dmixin.env.disableRefMap=true"
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg".toString()
 
             mods {
                 perpetual_durability {
@@ -49,8 +48,8 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            arg "-mixin.config=perpetual_durability.mixins.json"
-            jvmArg "-Dmixin.env.disableRefMap=true"
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg".toString()
 
             mods {
                 perpetual_durability {
@@ -63,6 +62,8 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg".toString()
             args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
@@ -92,7 +93,7 @@ dependencies {
 
     compileOnly fg.deobf("mezz.jei:jei-1.16.5:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:${jei_version}")
-    annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 jar {
