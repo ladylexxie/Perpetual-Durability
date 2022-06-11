@@ -16,18 +16,8 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
 mixin {
-    add sourceSets.main, "perpetual_durability.refmap.json"
-}
-
-repositories {
-    maven {
-        name = "Progwml6 maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        name = "ModMaven"
-        url = "https://modmaven.k-4u.nl"
-    }
+    add sourceSets.main, "${modid}.refmap.json"
+    config "${modid}.mixins.json"
 }
 
 version = "${mod_version}"
@@ -44,7 +34,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
             arg "-mixin.config=perpetual_durability.mixins.json"
+            jvmArg "-Dmixin.env.disableRefMap=true"
 
             mods {
                 perpetual_durability {
@@ -58,6 +50,7 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
             arg "-mixin.config=perpetual_durability.mixins.json"
+            jvmArg "-Dmixin.env.disableRefMap=true"
 
             mods {
                 perpetual_durability {
@@ -82,6 +75,17 @@ minecraft {
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    maven {
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        name = "ModMaven"
+        url = "https://modmaven.k-4u.nl"
+    }
+}
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
