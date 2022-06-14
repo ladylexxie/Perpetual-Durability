@@ -22,7 +22,6 @@ public class ApplyPerpetual extends UpgradeRecipe {
 
     public ApplyPerpetual(ResourceLocation recipeID) {
         super(recipeID, Ingredient.EMPTY, Ingredient.EMPTY, ItemStack.EMPTY);
-        PerpetualDurability.LOGGER.error("test");
     }
 
     @Override
@@ -33,8 +32,8 @@ public class ApplyPerpetual extends UpgradeRecipe {
 
         if (input.isDamageableItem() && !ModdedEnchantmentHelper.hasEnchant(input, LexRegistry.PERPETUAL.get())) {
             if (modBlacklist.contains(ForgeRegistries.ITEMS.getKey(input.getItem()).getNamespace())) return false;
-            if (itemBlacklist.contains(ForgeRegistries.ITEMS.getKey(input.getItem()).getNamespace())) return false;
-            return Objects.equals(ForgeRegistries.ITEMS.getKey(addition.getItem()).getNamespace(), id);
+            if (itemBlacklist.contains(ForgeRegistries.ITEMS.getKey(input.getItem()).toString())) return false;
+            return Objects.equals(ForgeRegistries.ITEMS.getKey(addition.getItem()).toString(), id);
         }
         return false;
     }

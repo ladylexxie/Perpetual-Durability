@@ -1,4 +1,4 @@
-//package ladylexxie.perpetual_durability.integration;
+package ladylexxie.perpetual_durability.integration;
 //
 //import ladylexxie.perpetual_durability.PerpetualDurability;
 //import mezz.jei.api.IModPlugin;
