@@ -1,3 +1,4 @@
 {
-  "enchantment.perpetual_durability.perpetual": "Perpetual"
+  "enchantment.perpetual_durability.perpetual": "Perpetual",
+  "enchantment.perpetual_durability.perpetual.desc": "Will make any item with durability indestructible."
 }
