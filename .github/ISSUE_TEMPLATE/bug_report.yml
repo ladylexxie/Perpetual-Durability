@@ -4,16 +4,24 @@ title: "[Bug]: "
 labels: [ Bug ]
 body:
   - type: dropdown
+    id: minecraft-version
+    attributes:
+      label: Minecraft Version
+      description: What version of Minecraft are you playing on?
+      options:
+        - 1.19
+        - 1.18.2
+        - 1.17.1
+        - 1.16.5
+    validations:
+      required: true
+
+  - type: input
     id: mod-version
     attributes:
-      label: Mod Version
+      label: Mod Verion
       description: What version of the mod are you using?
-      options:
-        - 1.3.0
-        - 1.2.1
-        - 1.2.0
-        - 1.1.0
-        - 1.0.0
+      placeholder: 1.3.0
     validations:
       required: true
 
@@ -30,7 +38,7 @@ body:
     id: logs
     attributes:
       label: Crash Log
-      description: Please upload your crash log to [GitHub Gist](https://gist.github.com/) and leave the link here.
+      description: If you have a crash log, please upload it to [GitHub Gist](https://gist.github.com/) and leave the link here.
       placeholder: https://gist.github.com/
     validations:
-      required: true
+      required: false
