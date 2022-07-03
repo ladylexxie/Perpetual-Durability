@@ -1,0 +1,44 @@
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: [ Bug ]
+body:
+  - type: dropdown
+    id: minecraft-version
+    attributes:
+      label: Minecraft Version
+      description: What version of Minecraft are you playing on?
+      options:
+        - 1.19
+        - 1.18.2
+        - 1.17.1
+        - 1.16.5
+    validations:
+      required: true
+
+  - type: textarea
+    id: mod-version
+    attributes:
+      label: Mod Verion
+      description: What version of the mod are you using?
+      placeholder: 1.3.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Please give a thorough explanation of what happened. Attach/Link relevant images/files in relation to the issue.
+      placeholder: Tell me what you see!
+    validations:
+      required: true
+
+  - type: input
+    id: logs
+    attributes:
+      label: Crash Log
+      description: If you have a crash log, please upload it to [GitHub Gist](https://gist.github.com/) and leave the link here.
+      placeholder: https://gist.github.com/
+    validations:
+      required: false
