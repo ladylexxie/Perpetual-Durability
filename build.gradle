@@ -24,7 +24,7 @@ mixin {
 
 version = "${mc_version}-${mod_version}"
 group = "ladylexxie.${modid}"
-archivesBaseName = "${modid}"
+archivesBaseName = modid
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
