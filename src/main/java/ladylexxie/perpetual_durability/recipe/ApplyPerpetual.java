@@ -12,6 +12,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.UpgradeRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Objects;
@@ -39,7 +40,7 @@ public class ApplyPerpetual extends UpgradeRecipe {
     }
 
     @Override
-    public ItemStack assemble(Container inventory) {
+    public @NotNull ItemStack assemble( Container inventory) {
         ItemStack stack = inventory.getItem(0).copy();
         stack.enchant(LexRegistry.PERPETUAL.get(), 1);
 
@@ -47,7 +48,7 @@ public class ApplyPerpetual extends UpgradeRecipe {
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public @NotNull ItemStack getResultItem() {
         return ItemStack.EMPTY;
     }
 
@@ -58,7 +59,7 @@ public class ApplyPerpetual extends UpgradeRecipe {
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public @NotNull RecipeSerializer<?> getSerializer() {
         return LexRegistry.APPLY_PERPETUAL.get();
     }
 }
