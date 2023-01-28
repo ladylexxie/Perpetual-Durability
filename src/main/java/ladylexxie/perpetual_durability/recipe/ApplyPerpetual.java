@@ -1,13 +1,11 @@
 package ladylexxie.perpetual_durability.recipe;
 
 import com.google.gson.JsonObject;
-import ladylexxie.perpetual_durability.PerpetualDurability;
 import ladylexxie.perpetual_durability.config.EnchantConfig;
 import ladylexxie.perpetual_durability.registry.LexRegistry;
 import ladylexxie.perpetual_durability.util.ModdedEnchantmentHelper;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -72,16 +70,10 @@ public class ApplyPerpetual extends UpgradeRecipe {
 
 	public static class Serializer implements RecipeSerializer<ApplyPerpetual> {
 		public ApplyPerpetual fromJson(ResourceLocation p_44562_, JsonObject p_44563_) {
-			Ingredient ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(p_44563_, "base"));
-			Ingredient ingredient1 = Ingredient.fromJson(GsonHelper.getAsJsonObject(p_44563_, "addition"));
-			ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(p_44563_, "result"));
 			return new ApplyPerpetual(p_44562_);
 		}
 
 		public ApplyPerpetual fromNetwork(ResourceLocation p_44565_, FriendlyByteBuf p_44566_) {
-			Ingredient ingredient = Ingredient.fromNetwork(p_44566_);
-			Ingredient ingredient1 = Ingredient.fromNetwork(p_44566_);
-			ItemStack itemstack = p_44566_.readItem();
 			return new ApplyPerpetual(p_44565_);
 		}
 
