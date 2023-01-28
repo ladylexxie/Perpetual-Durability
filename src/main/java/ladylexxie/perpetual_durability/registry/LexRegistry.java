@@ -4,7 +4,8 @@ import ladylexxie.perpetual_durability.PerpetualDurability;
 import ladylexxie.perpetual_durability.enchant.PerpetualEnchant;
 import ladylexxie.perpetual_durability.recipe.ApplyPerpetual;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleRecipeSerializer;
+import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
+import net.minecraft.world.item.crafting.UpgradeRecipe;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -18,7 +19,8 @@ public class LexRegistry {
     private static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, PerpetualDurability.MOD_ID);
     public static final EnchantmentCategory DESTRUCTIBLE = EnchantmentCategory.create("DESTRUCTIBLE", item -> item.isDamageable(null));
     public static final RegistryObject<Enchantment> PERPETUAL = ENCHANTMENTS.register("perpetual", PerpetualEnchant::new);
-    public static final RegistryObject<RecipeSerializer<?>> APPLY_PERPETUAL = RECIPES.register("apply_perpetual", () -> new SimpleRecipeSerializer<>(ApplyPerpetual::new));
+//    public static final RegistryObject<RecipeSerializer<?>> APPLY_PERPETUAL = RECIPES.register("apply_perpetual", new SimpleCraftingRecipeSerializer<>(ApplyPerpetual::new));
+    public static final RegistryObject<RecipeSerializer<?>> APPLY_PERPETUAL = RECIPES.register("apply_perpetual", new ApplyPerpetual.Serializer());
 
     public static void init(){
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();

@@ -6,11 +6,12 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 @JeiPlugin
 public class PerpetualDurabilityJEIPlugin implements IModPlugin {
     @Override
-    public ResourceLocation getPluginUid(){
+    public @NotNull ResourceLocation getPluginUid(){
         return new ResourceLocation(PerpetualDurability.MOD_ID, "main");
     }
 
