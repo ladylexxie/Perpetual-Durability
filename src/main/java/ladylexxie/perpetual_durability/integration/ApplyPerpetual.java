@@ -14,31 +14,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ApplyPerpetual {
-    public static List<UpgradeRecipe> getRecipes(){
-        List<UpgradeRecipe> recipes = new ArrayList<>();
-        List<Item> list = new ArrayList<>();
+	public static List<UpgradeRecipe> getRecipes() {
+		List<UpgradeRecipe> recipes = new ArrayList<>();
+		List<Item> list = new ArrayList<>();
 
-        ForgeRegistries.ITEMS.getValues().forEach(item -> {
-            if(item.isDamageable(null)){
-                list.add(item);
-            }
-        });
+		ForgeRegistries.ITEMS.getValues().forEach(item -> { if( item.isDamageable(null) ) { list.add(item); } });
 
-        String configItem = EnchantConfig.PERPETUAL_ITEM.get();
-        Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(configItem));
+		String configItem = EnchantConfig.PERPETUAL_ITEM.get();
+		Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(configItem));
 
-        Ingredient ingredient = Ingredient.of(item.getDefaultInstance());
+		Ingredient ingredient = Ingredient.of(item.getDefaultInstance());
 
-        list.forEach(itemList -> {
-            ResourceLocation itemID = ForgeRegistries.ITEMS.getKey(itemList);
-            ResourceLocation id = new ResourceLocation(PerpetualDurability.MOD_ID, "jei.apply_perpetual." + itemID.getNamespace() + "." + itemID.getPath());
-            ItemStack output = new ItemStack(itemList);
-            output.enchant(LexRegistry.PERPETUAL.get(), 1);
-            UpgradeRecipe recipe = new UpgradeRecipe(id, Ingredient.of(itemList), ingredient, output);
+		list.forEach(itemList -> {
+			ResourceLocation itemID = ForgeRegistries.ITEMS.getKey(itemList);
+			ResourceLocation id = new ResourceLocation(PerpetualDurability.MOD_ID, "jei.apply_perpetual." + itemID.getNamespace() + "." + itemID.getPath());
+			ItemStack output = new ItemStack(itemList);
+			output.enchant(LexRegistry.PERPETUAL.get(), 1);
+			UpgradeRecipe recipe = new UpgradeRecipe(id, Ingredient.of(itemList), ingredient, output);
 
-            recipes.add(recipe);
-        });
+			recipes.add(recipe);
+		});
 
-        return recipes;
-    }
+		return recipes;
+	}
 }

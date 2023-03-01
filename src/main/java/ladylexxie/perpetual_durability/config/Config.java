@@ -9,19 +9,17 @@ import java.io.File;
 
 @Mod.EventBusSubscriber
 public class Config {
-    private static final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
+	private static final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
+	public static final ForgeConfigSpec COMMON_CONFIG;
 
-    public static final ForgeConfigSpec COMMON_CONFIG;
+	static {
+		EnchantConfig.init(COMMON_BUILDER);
+		COMMON_CONFIG = COMMON_BUILDER.build();
+	}
 
-    static {
-        EnchantConfig.init(COMMON_BUILDER);
-
-        COMMON_CONFIG = COMMON_BUILDER.build();
-    }
-
-    public static void loadConfig(ForgeConfigSpec config, String path){
-        final CommentedFileConfig file = CommentedFileConfig.builder(new File(path)).preserveInsertionOrder().sync().autosave().writingMode(WritingMode.REPLACE).build();
-        file.load();
-        config.setConfig(file);
-    }
+	public static void loadConfig( ForgeConfigSpec config, String path ) {
+		final CommentedFileConfig file = CommentedFileConfig.builder(new File(path)).preserveInsertionOrder().sync().autosave().writingMode(WritingMode.REPLACE).build();
+		file.load();
+		config.setConfig(file);
+	}
 }
