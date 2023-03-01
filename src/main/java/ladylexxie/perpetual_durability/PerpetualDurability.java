@@ -10,16 +10,15 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Mod(PerpetualDurability.MOD_ID)
+@Mod( PerpetualDurability.MOD_ID )
 public class PerpetualDurability {
-    public static final String MOD_ID = "perpetual_durability";
-    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static final String MOD_ID = "perpetual_durability";
 
-    public PerpetualDurability(){
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
-        Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(PerpetualDurability.MOD_ID + "-common.toml").toString());
+	public PerpetualDurability() {
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
+		Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(PerpetualDurability.MOD_ID + "-common.toml").toString());
 
-        LexRegistry.init();
-        MinecraftForge.EVENT_BUS.register(this);
-    }
+		LexRegistry.init();
+		MinecraftForge.EVENT_BUS.register(this);
+	}
 }
