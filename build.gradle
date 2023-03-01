@@ -63,17 +63,9 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    maven {
-        name = "Progwml6 maven"
-        url = "https://maven.blamejared.com/"
-    }
-    maven {
-        name = "ModMaven"
-        url = "https://modmaven.dev"
-    }
-    maven {
-        url = "https://maven.shedaniel.me"
-    }
+    maven { url "https://maven.blamejared.com/" }
+    maven { url "https://modmaven.dev" }
+    maven { url "https://maven.shedaniel.me" }
 }
 
 dependencies {
@@ -85,6 +77,7 @@ dependencies {
     implementation fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 
     // REI
+    compileOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-api-forge:${rei_version}")
     implementation fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_version}")
 }
 

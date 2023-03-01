@@ -34,11 +34,11 @@ public class PerpetualDurabilityJEIPlugin implements IModPlugin {
 		book.getOrCreateTag().putByte("Unbreakable", (byte) 1);
 		book.getOrCreateTag().put("StoredEnchantments", new ListTag());
 
-		ListTag listnbt = book.getOrCreateTag().getList("StoredEnchantments", 10);
-		CompoundTag compoundnbt = new CompoundTag();
-		compoundnbt.putString("id", LexRegistry.PERPETUAL.getId().toString());
-		compoundnbt.putShort("lvl", (short) 1);
-		listnbt.add(compoundnbt);
+		ListTag listTag = book.getOrCreateTag().getList("StoredEnchantments", 10);
+		CompoundTag compoundTag = new CompoundTag();
+		compoundTag.putString("id", LexRegistry.PERPETUAL.getId().toString());
+		compoundTag.putShort("lvl", (short) 1);
+		listTag.add(compoundTag);
 
 		runtime.getIngredientManager().removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, Collections.singleton(book));
 	}
