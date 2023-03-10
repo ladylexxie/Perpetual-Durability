@@ -3,6 +3,7 @@ package ladylexxie.perpetual_durability.integration;
 import ladylexxie.perpetual_durability.PerpetualDurability;
 import ladylexxie.perpetual_durability.config.EnchantConfig;
 import ladylexxie.perpetual_durability.registry.LexRegistry;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -29,7 +30,10 @@ public class ApplyPerpetual {
 			ResourceLocation itemID = ForgeRegistries.ITEMS.getKey(itemList);
 			ResourceLocation id = new ResourceLocation(PerpetualDurability.MOD_ID, "jei.apply_perpetual." + itemID.getNamespace() + "." + itemID.getPath());
 			ItemStack output = new ItemStack(itemList);
-			output.enchant(LexRegistry.PERPETUAL.get(), 1);
+			CompoundTag nbt = output.getOrCreateTag();
+			nbt.putBoolean("Unbreakable", true);
+			output.setTag(nbt);
+			output.setDamageValue(0);
 			UpgradeRecipe recipe = new UpgradeRecipe(id, Ingredient.of(itemList), ingredient, output);
 
 			recipes.add(recipe);
