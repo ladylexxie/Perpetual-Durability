@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.SmithingRecipe;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -29,7 +30,10 @@ public class ApplyPerpetual {
 			ResourceLocation itemID = ForgeRegistries.ITEMS.getKey(itemList);
 			ResourceLocation id = new ResourceLocation(PerpetualDurability.MOD_ID, "jei.apply_perpetual." + itemID.getNamespace() + "." + itemID.getPath());
 			ItemStack output = new ItemStack(itemList);
-			output.enchant(LexRegistry.PERPETUAL.get(), 1);
+			CompoundNBT nbt = output.getOrCreateTag();
+			nbt.putBoolean("Unbreakable", true);
+			output.setTag(nbt);
+			output.setDamageValue(0);
 			SmithingRecipe recipe = new SmithingRecipe(id, Ingredient.of(itemList), ingredient, output);
 
 			recipes.add(recipe);
