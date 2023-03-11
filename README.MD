@@ -2,9 +2,9 @@ Perpetual Durability
 ================
 ### A mod that adds a way to make items unbreakable
 
-[![Modrinth](https://img.shields.io/modrinth/dt/perpetual-durability?color=00AF5C&label=downloads&logo=modrinth)](https://modrinth.com/mod/perpetual-durability)
+[![Modrinth](https://img.shields.io/modrinth/dt/perpetual-durability?color=00AF5C&label=downloads&style=for-the-badge&logo=modrinth)](https://modrinth.com/mod/perpetual-durability)
 
-[![CurseForge](https://cf.way2muchnoise.eu/full_515925_downloads.svg)](https://beta.curseforge.com/minecraft/mc-mods/perpetual-durability)
+[![CurseForge](https://img.shields.io/badge/dynamic/json?color=e04e14&label=downloads&style=for-the-badge&query=downloads.total&url=https%3A%2F%2Fapi.cfwidget.com%2F515925&logo=curseforge)](https://beta.curseforge.com/minecraft/mc-mods/perpetual-durability)
 
 ### Dependencies
 - This mod has no dependencies
