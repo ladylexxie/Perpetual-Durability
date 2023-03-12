@@ -20,9 +20,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class ApplyPerpetual extends UpgradeRecipe {
-//	final Ingredient base = Ingredient.EMPTY;
-//	final Ingredient addition = Ingredient.EMPTY;
-//	final ItemStack result = ItemStack.EMPTY;
 
 	@SuppressWarnings( "unchecked" )
 	private final List<String> modBlacklist = (List<String>) EnchantConfig.MOD_BLACKLIST.get();
@@ -70,15 +67,11 @@ public class ApplyPerpetual extends UpgradeRecipe {
 	@Override
 	public @NotNull RecipeSerializer<?> getSerializer() { return LexRegistry.APPLY_PERPETUAL.get(); }
 
-//	public static class Serializer implements RecipeSerializer<ApplyPerpetual> {
-//		public ApplyPerpetual fromJson( ResourceLocation p_44562_, JsonObject p_44563_ ) { return new ApplyPerpetual(p_44562_); }
-//
-//		public ApplyPerpetual fromNetwork( ResourceLocation p_44565_, FriendlyByteBuf p_44566_ ) { return new ApplyPerpetual(p_44565_); }
-//
-//		public void toNetwork( FriendlyByteBuf p_44553_, ApplyPerpetual p_44554_ ) {
-//			p_44554_.base.toNetwork(p_44553_);
-//			p_44554_.addition.toNetwork(p_44553_);
-//			p_44553_.writeItem(p_44554_.result);
-//		}
-//	}
+	public static class Serializer implements RecipeSerializer<ApplyPerpetual> {
+		public ApplyPerpetual fromJson( ResourceLocation p_44562_, JsonObject p_44563_ ) { return new ApplyPerpetual(p_44562_); }
+
+		public ApplyPerpetual fromNetwork( ResourceLocation p_44565_, FriendlyByteBuf p_44566_ ) { return new ApplyPerpetual(p_44565_); }
+
+		public void toNetwork( FriendlyByteBuf p_44553_, ApplyPerpetual p_44554_ ) {}
+	}
 }
