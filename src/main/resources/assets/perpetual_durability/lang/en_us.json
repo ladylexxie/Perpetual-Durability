@@ -2,5 +2,12 @@
   "tooltip.perpetual_durability.debug_nbt": "Hold ALT to see NBT",
   "tooltip.perpetual_durability.debug_tags": "Hold CTRL to see tags",
   "tooltip.perpetual_durability.debug_tags_item": "Item Tags:",
-  "tooltip.perpetual_durability.debug_tags_block": "Block Tags:"
+  "tooltip.perpetual_durability.debug_tags_block": "Block Tags:",
+
+  "commands.perpetual_durability.perpetuate.success.multiple": "Perpetuated %s entities' items",
+  "commands.perpetual_durability.perpetuate.success.single": "Perpetuated %s's item",
+  "commands.perpetual_durability.perpetuate.failed": "Nothing changed. Targets either have no item in their hands or the tag could not be applied",
+  "commands.perpetual_durability.perpetuate.failed.entity": "%s is not a valid entity for this command",
+  "commands.perpetual_durability.perpetuate.failed.incompatible": "%s cannot be perpetuated",
+  "commands.perpetual_durability.perpetuate.failed.itemless": "%s is not holding any item"
 }

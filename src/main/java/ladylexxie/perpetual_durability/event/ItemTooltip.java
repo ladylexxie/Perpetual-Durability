@@ -75,7 +75,7 @@ public class ItemTooltip {
 	}
 
 	@SubscribeEvent
-	public static void tooltips( ItemTooltipEvent e ) {
+	public static void onItemTooltip( ItemTooltipEvent e ) {
 		List<Component> tooltip = e.getToolTip();
 		ItemStack itemStack = e.getItemStack();
 

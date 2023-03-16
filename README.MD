@@ -1,4 +1,5 @@
-Perpetual Durability
+# Perpetual Durability
+**!! WIP !!**
 ================
 ### A mod that adds a way to make items unbreakable
 
@@ -10,11 +11,10 @@ Perpetual Durability
 - It has compatibility with JEI, where it shows how to apply the Unbreakable tag on any item
 
 ### Configuring The Mod
-- This mod creates a config file called `perpetual_durability-common.toml` in the `/config/` folder
-- The config file has 3 fields:
-  - `enchantItem`: the ID of the item you want to use for applying the effect
-  - `modBlacklist`: a list of blacklisted mods. None of the mod items will be able to get the effect
-  - `itemBlacklist`: a list of blacklisted items. None of the items will be able to get the effect
+This mod creates two config files in the `/config/` folder\
+Their functionality is detailed in the wiki\
+To change the item that will apply the Unbreakable effect, you need to remove/add the `perpetual_durability:perpetual` tag to any item(s)\
+By default, the tag is added to `minecraft:nether_star`
 
 ### Reporting Bugs
 If you find any bugs, please report them on the [issue tracker](https://github.com/ladylexxie/Perpetual-Durability/issues).
