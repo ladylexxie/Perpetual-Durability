@@ -28,12 +28,12 @@ public class ItemTooltip {
 		tooltip.add(Component.translatable("tooltip.perpetual_durability.perpetual.desc").withStyle(ChatFormatting.LIGHT_PURPLE));
 	}
 
-	private static void changeUnbreakableColor( ItemStack stack, List<Component> tooltip ) {
+	private static void renameUnbreakable( ItemStack stack, List<Component> tooltip ) {
 		// Changing the color of the Unbreakable tooltip text
 		if( !stack.getOrCreateTag().getBoolean("Unbreakable") ) return;
 		tooltip.forEach(line -> {
 			if( !line.getString().equals("Unbreakable") ) return;
-			tooltip.set(tooltip.indexOf(line), Component.translatable("item.unbreakable").withStyle(ChatFormatting.DARK_PURPLE));
+			tooltip.set(tooltip.indexOf(line), Component.literal("Perpetual").withStyle(ChatFormatting.DARK_PURPLE));
 		});
 	}
 
@@ -80,7 +80,7 @@ public class ItemTooltip {
 		ItemStack itemStack = e.getItemStack();
 
 		showTagDescription(itemStack, tooltip);
-		changeUnbreakableColor(itemStack, tooltip);
+		renameUnbreakable(itemStack, tooltip);
 		showDebugTags(itemStack, tooltip, e);
 		showDebugNBT(itemStack, tooltip, e);
 	}

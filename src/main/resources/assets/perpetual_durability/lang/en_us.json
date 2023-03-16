@@ -1,4 +1,5 @@
 {
+  "tooltip.perpetual_durability.perpetual.desc": "This item can be used to perpetuate",
   "tooltip.perpetual_durability.debug_nbt": "Hold ALT to see NBT",
   "tooltip.perpetual_durability.debug_tags": "Hold CTRL to see tags",
   "tooltip.perpetual_durability.debug_tags_item": "Item Tags:",

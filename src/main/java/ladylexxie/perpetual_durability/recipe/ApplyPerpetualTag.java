@@ -33,7 +33,7 @@ public class ApplyPerpetualTag extends LegacyUpgradeRecipe {
 
 		if( !input.isDamageableItem() ) return false;
 		if( !addition.is(PRegistry.TAG_PERPETUAL) ) return false;
-		if( !canGetTag(input) ) return false;
+		if( !PUtils.canPerpetuate(input) ) return false;
 		return true;
 	}
 
@@ -48,14 +48,6 @@ public class ApplyPerpetualTag extends LegacyUpgradeRecipe {
 	@Override public ItemStack getResultItem( RegistryAccess ra ) { return ItemStack.EMPTY; }
 	@Override public boolean isAdditionIngredient( ItemStack addition ) { return addition.is(PRegistry.TAG_PERPETUAL); }
 	@Override public RecipeSerializer<?> getSerializer() { return PRegistry.APPLY_PERPETUAL_TAG.get(); }
-
-	private boolean canGetTag( ItemStack stack ) {
-		ResourceLocation stackID = PUtils.getID(stack);
-		if( modBlacklist.contains(stackID.getNamespace()) ) return false;
-		if( itemBlacklist.contains(stackID.toString()) ) return false;
-		if( tagsBlacklist.stream().noneMatch(tag -> PUtils.hasTag(stack, tag)) ) return false;
-		return true;
-	}
 
 	public static class Serializer implements RecipeSerializer<ApplyPerpetualTag> {
 		public ApplyPerpetualTag fromJson( ResourceLocation id, JsonObject _unused ) { return new ApplyPerpetualTag(id); }
