@@ -16,6 +16,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
+@SuppressWarnings("removal")
 public class ApplyPerpetualTag extends LegacyUpgradeRecipe {
 	private static final List<String> modBlacklist = (List<String>) PCommonConfig.MOD_BLACKLIST.get();
 	private static final List<String> itemBlacklist = (List<String>) PCommonConfig.ITEM_BLACKLIST.get();
