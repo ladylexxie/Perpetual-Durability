@@ -27,6 +27,7 @@ public class PUtils {
 	public static boolean canPerpetuate( ItemStack stack ) { return canPerpetuate(getID(stack)); }
 	public static boolean canPerpetuate( Item item ) { return canPerpetuate(getID(item)); }
 	public static boolean canPerpetuate( ResourceLocation id ) {
+		if( !getItemStackFromID(id).isDamageableItem() ) return false;
 		if( modBlacklist.contains(id.getNamespace()) ) return false;
 		if( itemBlacklist.contains(id.toString()) ) return false;
 		if( tagsBlacklist.stream().anyMatch(tag -> PUtils.hasTag(getItemStackFromID(id), tag)) ) return false;

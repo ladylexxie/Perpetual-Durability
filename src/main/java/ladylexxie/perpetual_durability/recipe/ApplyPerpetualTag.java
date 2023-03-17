@@ -1,7 +1,6 @@
 package ladylexxie.perpetual_durability.recipe;
 
 import com.google.gson.JsonObject;
-import ladylexxie.perpetual_durability.config.PCommonConfig;
 import ladylexxie.perpetual_durability.registry.PRegistry;
 import ladylexxie.perpetual_durability.util.PUtils;
 import net.minecraft.core.RegistryAccess;
@@ -14,14 +13,8 @@ import net.minecraft.world.item.crafting.LegacyUpgradeRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
-import java.util.List;
-
 @SuppressWarnings("removal")
 public class ApplyPerpetualTag extends LegacyUpgradeRecipe {
-	private static final List<String> modBlacklist = (List<String>) PCommonConfig.MOD_BLACKLIST.get();
-	private static final List<String> itemBlacklist = (List<String>) PCommonConfig.ITEM_BLACKLIST.get();
-	private static final List<String> tagsBlacklist = (List<String>) PCommonConfig.TAGS_BLACKLIST.get();
-
 	public ApplyPerpetualTag( ResourceLocation recipeID ) {
 		super(recipeID, Ingredient.EMPTY, Ingredient.EMPTY, ItemStack.EMPTY);
 	}
@@ -31,7 +24,6 @@ public class ApplyPerpetualTag extends LegacyUpgradeRecipe {
 		ItemStack input = inventory.getItem(0);
 		ItemStack addition = inventory.getItem(1);
 
-		if( !input.isDamageableItem() ) return false;
 		if( !addition.is(PRegistry.TAG_PERPETUAL) ) return false;
 		if( !PUtils.canPerpetuate(input) ) return false;
 		return true;
