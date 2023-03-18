@@ -7,12 +7,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PUtils {
-	private static final List<String> modBlacklist = (List<String>) PCommonConfig.MOD_BLACKLIST.get();
-	private static final List<String> itemBlacklist = (List<String>) PCommonConfig.ITEM_BLACKLIST.get();
-	private static final List<String> tagsBlacklist = (List<String>) PCommonConfig.TAGS_BLACKLIST.get();
+	private static final List<String> modBlacklist = new ArrayList<>(PCommonConfig.MOD_BLACKLIST.get());
+	private static final List<String> itemBlacklist = new ArrayList<>(PCommonConfig.ITEM_BLACKLIST.get());
+	private static final List<String> tagsBlacklist = new ArrayList<>(PCommonConfig.TAGS_BLACKLIST.get());
 
 	public static boolean hasTag( ItemStack stack, TagKey<Item> tag ) { return hasTag(stack, tag.toString()); }
 	public static boolean hasTag( ItemStack stack, ResourceLocation tag ) { return hasTag(stack, tag.toString()); }
@@ -34,7 +35,6 @@ public class PUtils {
 		return true;
 	}
 
-	public static ItemStack getItemStackFromID( ResourceLocation id ) {
-		return ForgeRegistries.ITEMS.getValue(id).getDefaultInstance();
-	}
+	public static ItemStack getItemStackFromID( ResourceLocation id ) {	return getItemFromID(id).getDefaultInstance(); }
+	public static Item getItemFromID( ResourceLocation id ) { return ForgeRegistries.ITEMS.getValue(id); }
 }

@@ -33,7 +33,7 @@ public class ItemTooltip {
 		if( !stack.getOrCreateTag().getBoolean("Unbreakable") ) return;
 		tooltip.forEach(line -> {
 			if( !line.getString().equals("Unbreakable") ) return;
-			tooltip.set(tooltip.indexOf(line), Component.literal("Perpetual").withStyle(ChatFormatting.DARK_PURPLE));
+			tooltip.set(tooltip.indexOf(line), Component.translatable("tooltip.perpetual_durability.perpetual.name").withStyle(ChatFormatting.DARK_PURPLE));
 		});
 	}
 
