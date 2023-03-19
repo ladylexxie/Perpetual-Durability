@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
 import ladylexxie.perpetual_durability.config.PClientConfig;
 import ladylexxie.perpetual_durability.registry.PRegistry;
+import ladylexxie.perpetual_durability.util.PUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -28,13 +29,19 @@ public class ItemTooltip {
 		tooltip.add(Component.translatable("tooltip.perpetual_durability.perpetual.desc").withStyle(ChatFormatting.LIGHT_PURPLE));
 	}
 
-	private static void renameUnbreakable( ItemStack stack, List<Component> tooltip ) {
-		// Changing the color of the Unbreakable tooltip text
-		if( !stack.getOrCreateTag().getBoolean("Unbreakable") ) return;
-		tooltip.forEach(line -> {
-			if( !line.getString().equals("Unbreakable") ) return;
-			tooltip.set(tooltip.indexOf(line), Component.translatable("tooltip.perpetual_durability.perpetual.name").withStyle(ChatFormatting.DARK_PURPLE));
-		});
+	private static void coloredName( ItemStack stack, List<Component> tooltip ) {
+		if( stack.hasTag() && !stack.getOrCreateTag().getBoolean("Unbreakable") ) return;
+
+		for( Component line : tooltip ) {
+			if( !line.getString().equals(Component.translatable("item.unbreakable").getString()) ) continue;
+			if( PClientConfig.COLORFUL_TOOLTIP.get() ) {
+				String perpetual = Component.translatable("tooltip.perpetual_durability.perpetual.name").getString();
+				tooltip.set(tooltip.indexOf(line), PUtils.animateTextColor(perpetual));
+			} else {
+				tooltip.set(tooltip.indexOf(line), Component.translatable("tooltip.perpetual_durability.perpetual.name").withStyle(ChatFormatting.DARK_RED));
+			}
+			break;
+		}
 	}
 
 	private static void showDebugTags( ItemStack stack, List<Component> tooltip, ItemTooltipEvent event ) {
@@ -80,7 +87,7 @@ public class ItemTooltip {
 		ItemStack itemStack = e.getItemStack();
 
 		showTagDescription(itemStack, tooltip);
-		renameUnbreakable(itemStack, tooltip);
+		coloredName(itemStack, tooltip);
 		showDebugTags(itemStack, tooltip, e);
 		showDebugNBT(itemStack, tooltip, e);
 	}

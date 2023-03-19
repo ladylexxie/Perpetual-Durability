@@ -14,8 +14,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
 @SuppressWarnings("removal")
-public class ApplyPerpetualTag extends LegacyUpgradeRecipe {
-	public ApplyPerpetualTag( ResourceLocation recipeID ) {
+public class PerpetuateRecipe extends LegacyUpgradeRecipe {
+	public PerpetuateRecipe( ResourceLocation recipeID ) {
 		super(recipeID, Ingredient.EMPTY, Ingredient.EMPTY, ItemStack.EMPTY);
 	}
 
@@ -41,9 +41,9 @@ public class ApplyPerpetualTag extends LegacyUpgradeRecipe {
 	@Override public boolean isAdditionIngredient( ItemStack addition ) { return addition.is(PRegistry.TAG_PERPETUAL); }
 	@Override public RecipeSerializer<?> getSerializer() { return PRegistry.APPLY_PERPETUAL_TAG.get(); }
 
-	public static class Serializer implements RecipeSerializer<ApplyPerpetualTag> {
-		public ApplyPerpetualTag fromJson( ResourceLocation id, JsonObject _unused ) { return new ApplyPerpetualTag(id); }
-		public ApplyPerpetualTag fromNetwork( ResourceLocation id, FriendlyByteBuf _unused ) { return new ApplyPerpetualTag(id); }
-		public void toNetwork( FriendlyByteBuf _unused1, ApplyPerpetualTag _unused2 ) { }
+	public static class Serializer implements RecipeSerializer<PerpetuateRecipe> {
+		public PerpetuateRecipe fromJson( ResourceLocation id, JsonObject _unused ) { return new PerpetuateRecipe(id); }
+		public PerpetuateRecipe fromNetwork( ResourceLocation id, FriendlyByteBuf _unused ) { return new PerpetuateRecipe(id); }
+		public void toNetwork( FriendlyByteBuf _unused1, PerpetuateRecipe _unused2 ) { }
 	}
 }
