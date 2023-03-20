@@ -1,41 +1,37 @@
 package ladylexxie.perpetual_durability.integration;
 
 import ladylexxie.perpetual_durability.PerpetualDurability;
-import ladylexxie.perpetual_durability.config.EnchantConfig;
-import ladylexxie.perpetual_durability.registry.LexRegistry;
+import ladylexxie.perpetual_durability.config.PClientConfig;
+import ladylexxie.perpetual_durability.registry.PRegistry;
+import ladylexxie.perpetual_durability.util.PUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.SmithingRecipe;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ApplyPerpetual {
 	public static List<SmithingRecipe> getRecipes() {
 		List<SmithingRecipe> recipes = new ArrayList<>();
-		List<Item> list = new ArrayList<>();
+		if( !PClientConfig.SHOW_JEI_RECIPE.get() ) return recipes;
 
-		ForgeRegistries.ITEMS.getValues().forEach(item -> { if( item.isDamageable(null) ) list.add(item); });
+		List<Item> listOfDamageableItems = ForgeRegistries.ITEMS.getValues().stream().filter(item -> item.isDamageable(null)).collect(Collectors.toList());
 
-		String configItem = EnchantConfig.PERPETUAL_ITEM.get();
-		Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(configItem));
+		listOfDamageableItems.forEach(item -> {
+			ResourceLocation itemID = PUtils.getID(item);
+			ItemStack stack = new ItemStack(item);
+			if(!PUtils.canPerpetuate(stack) ) return;
 
-		Ingredient ingredient = Ingredient.of(item.getDefaultInstance());
+			ResourceLocation recipeID = PerpetualDurability.asResource("jei.perpetuate." + itemID.toString().replace(":", "."));
+			stack.getOrCreateTag().putBoolean("Unbreakable", true);
+			stack.setDamageValue(0);
 
-		list.forEach(itemList -> {
-			ResourceLocation itemID = ForgeRegistries.ITEMS.getKey(itemList);
-			ResourceLocation id = new ResourceLocation(PerpetualDurability.MOD_ID, "jei.apply_perpetual." + itemID.getNamespace() + "." + itemID.getPath());
-			ItemStack output = new ItemStack(itemList);
-			CompoundNBT nbt = output.getOrCreateTag();
-			nbt.putBoolean("Unbreakable", true);
-			output.setTag(nbt);
-			output.setDamageValue(0);
-			SmithingRecipe recipe = new SmithingRecipe(id, Ingredient.of(itemList), ingredient, output);
-
+			SmithingRecipe recipe = new SmithingRecipe(recipeID, Ingredient.of(item), Ingredient.of(PRegistry.TAG_PERPETUAL), stack);
 			recipes.add(recipe);
 		});
 
