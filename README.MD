@@ -1,5 +1,4 @@
 # Perpetual Durability
-**!! WIP !!**
 ================
 ### A mod that adds a way to make items unbreakable
 
