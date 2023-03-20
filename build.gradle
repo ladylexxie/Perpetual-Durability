@@ -12,8 +12,8 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'maven-publish'
 
 version = "${mc_version}-${mod_version}"
-group = "ladylexxie.${modid}"
-archivesBaseName = modid
+group = "ladylexxie.${mod_id}"
+archivesBaseName = mod_id
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
