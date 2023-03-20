@@ -1,9 +1,9 @@
 package ladylexxie.perpetual_durability.integration;
 
 import ladylexxie.perpetual_durability.PerpetualDurability;
-import ladylexxie.perpetual_durability.config.EnchantConfig;
-import ladylexxie.perpetual_durability.registry.LexRegistry;
-import net.minecraft.nbt.CompoundTag;
+import ladylexxie.perpetual_durability.config.PClientConfig;
+import ladylexxie.perpetual_durability.registry.PRegistry;
+import ladylexxie.perpetual_durability.util.PUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -17,26 +17,20 @@ import java.util.List;
 public class ApplyPerpetual {
 	public static List<UpgradeRecipe> getRecipes() {
 		List<UpgradeRecipe> recipes = new ArrayList<>();
-		List<Item> list = new ArrayList<>();
+		if( !PClientConfig.SHOW_JEI_RECIPE.get() ) return recipes;
 
-		ForgeRegistries.ITEMS.getValues().forEach(item -> { if( item.isDamageable(null) ) { list.add(item); } });
+		List<Item> listOfDamageableItems = ForgeRegistries.ITEMS.getValues().stream().filter(item -> item.isDamageable(null)).toList();
 
-		String configItem = EnchantConfig.PERPETUAL_ITEM.get();
-		Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(configItem));
+		listOfDamageableItems.forEach(item -> {
+			ResourceLocation itemID = PUtils.getID(item);
+			ItemStack stack = new ItemStack(item);
+			if(!PUtils.canPerpetuate(stack) ) return;
 
-		Ingredient ingredient = Ingredient.of(item.getDefaultInstance());
-
-		list.forEach(itemList -> {
-			ResourceLocation itemID = ForgeRegistries.ITEMS.getKey(itemList);
-			ResourceLocation id = new ResourceLocation(PerpetualDurability.MOD_ID, "jei.apply_perpetual." + itemID.getNamespace() + "." + itemID.getPath());
-			ItemStack stack = new ItemStack(itemList);
-			CompoundTag nbt = stack.getOrCreateTag();
-			nbt.putBoolean("Unbreakable", true);
-			stack.setTag(nbt);
+			ResourceLocation recipeID = PerpetualDurability.asResource("jei.perpetuate." + itemID.toString().replace(":", "."));
+			stack.getOrCreateTag().putBoolean("Unbreakable", true);
 			stack.setDamageValue(0);
 
-			UpgradeRecipe recipe = new UpgradeRecipe(id, Ingredient.of(itemList), ingredient, stack);
-
+			UpgradeRecipe recipe = new UpgradeRecipe(recipeID, Ingredient.of(item), Ingredient.of(PRegistry.TAG_PERPETUAL), stack);
 			recipes.add(recipe);
 		});
 
