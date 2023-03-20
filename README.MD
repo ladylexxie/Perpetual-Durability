@@ -17,4 +17,4 @@ To change the item that will apply the Unbreakable effect, you need to remove/ad
 By default, the tag is added to `minecraft:nether_star`
 
 ### Reporting Bugs
-If you find any bugs, please report them on the [issue tracker](https://github.com/ladylexxie/Perpetual-Durability/issues).
+If you find any bugs, please report them on the [issue tracker](https://github.com/ladylexxie/Perpetual-Durability/issues/new/choose).
