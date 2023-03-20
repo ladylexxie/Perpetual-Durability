@@ -30,11 +30,9 @@ public class PUtils {
 	private static final List<String> tagsBlacklist = new ArrayList<>(PCommonConfig.TAGS_BLACKLIST.get());
 
 	public static ItemStack getItemStackFromID( ResourceLocation id ) { return getItemFromID(id).getDefaultInstance(); }
-
 	public static Item getItemFromID( ResourceLocation id ) { return ForgeRegistries.ITEMS.getValue(id); }
 
 	public static ResourceLocation getID( Item item ) { return ForgeRegistries.ITEMS.getKey(item); }
-
 	public static ResourceLocation getID( ItemStack stack ) { return getID(stack.getItem()); }
 
 	public static boolean canPerpetuate( ItemStack stack ) {
