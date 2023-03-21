@@ -39,7 +39,7 @@ public class PerpetuateRecipe extends LegacyUpgradeRecipe {
 
 	@Override public ItemStack getResultItem( RegistryAccess ra ) { return ItemStack.EMPTY; }
 	@Override public boolean isAdditionIngredient( ItemStack addition ) { return addition.is(PRegistry.TAG_PERPETUAL); }
-	@Override public RecipeSerializer<?> getSerializer() { return PRegistry.APPLY_PERPETUAL_TAG.get(); }
+	@Override public RecipeSerializer<?> getSerializer() { return PRegistry.PERPETUATE.get(); }
 
 	public static class Serializer implements RecipeSerializer<PerpetuateRecipe> {
 		public PerpetuateRecipe fromJson( ResourceLocation id, JsonObject _unused ) { return new PerpetuateRecipe(id); }

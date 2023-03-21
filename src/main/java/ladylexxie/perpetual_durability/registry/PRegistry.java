@@ -16,7 +16,7 @@ public class PRegistry {
 	public static final TagKey<Item> TAG_PERPETUAL = ItemTags.create(PerpetualDurability.asResource("perpetual"));
 
 	private static final DeferredRegister<RecipeSerializer<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, PerpetualDurability.ID);
-	public static final RegistryObject<RecipeSerializer<?>> APPLY_PERPETUAL_TAG = RECIPES.register("apply_perpetual_tag", PerpetuateRecipe.Serializer::new);
+	public static final RegistryObject<RecipeSerializer<?>> PERPETUATE = RECIPES.register("perpetuate", PerpetuateRecipe.Serializer::new);
 
 	public static void init() {
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
