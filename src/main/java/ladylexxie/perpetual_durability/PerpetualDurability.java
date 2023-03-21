@@ -5,12 +5,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
-import org.slf4j.Logger;
+import org.apache.logging.log4j.Logger;
 
 @Mod( PerpetualDurability.ID )
 public class PerpetualDurability {
 	public static final String ID = "perpetual_durability";
-	public static final Logger LOGGER = (Logger) LogManager.getLogger();
+	public static final Logger LOGGER = LogManager.getLogger();
 
 	public PerpetualDurability() {
 		PRegistry.init();
