@@ -1,110 +1,53 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        mavenCentral()
+plugins {
+    id "architectury-plugin" version "3.4-SNAPSHOT"
+    id "dev.architectury.loom" version "0.11.0-SNAPSHOT" apply false
+}
+
+architectury { minecraft = rootProject.mc_version }
+
+subprojects {
+    apply plugin: "dev.architectury.loom"
+
+    loom {
+        silentMojangMappingsLicense()
     }
+
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-    }
-}
-apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'maven-publish'
-
-version = "${mc_version}-${mod_version}"
-group = "ladylexxie.${mod_id}"
-archivesBaseName = mod_id
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
-minecraft {
-    mappings channel: 'official', version: mc_version
-    runs {
-        client {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-
-            mods {
-                perpetual_durability {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-
-            mods {
-                perpetual_durability {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            args '--mod', 'perpetual_durability', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
-            mods {
-                perpetual_durability {
-                    source sourceSets.main
-                }
-            }
-        }
+        minecraft "com.mojang:minecraft:${rootProject.mc_version}"
+        mappings loom.officialMojangMappings()
     }
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+allprojects {
+    apply plugin: "java"
+    apply plugin: "architectury-plugin"
+    apply plugin: "maven-publish"
 
-repositories {
-    maven {
-        name = "Progwml6 maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        name = "ModMaven"
-        url = "https://modmaven.dev"
-    }
-}
+    archivesBaseName = rootProject.mod_id
+    version = rootProject.mod_version
+    group = "ladylexxie.${mod_id}"
 
-dependencies {
-    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
-    implementation fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
-}
-
-jar {
-    manifest {
-        attributes([
-                "Specification-Title": "Perpetual Durability",
-                "Specification-Vendor": "Lady Lexxie",
-                "Specification-Version": mod_version,
-                "Implementation-Title": project.name,
-                "Implementation-Version": project.version,
-                "Implementation-Vendor" :"Lady Lexxie",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
-}
-
-jar.finalizedBy('reobfJar')
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
-    }
     repositories {
         maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
+            url = "https://maven.architectury.dev/"
+            content { includeGroup "me.shedaniel" }
         }
+        maven {
+            url = "https://maven.saps.dev/releases"
+            content {
+                includeGroup "dev.latvian.mods"
+                includeGroup "dev.ftb.mods"
+            }
+        }
+        maven { url = "https://maven.blamejared.com/" }     // JEI
+        maven { url = "https://maven.shedaniel.me/" }       // REI
+        maven { url = "https://maven.parchmentmc.net/" }    // parchment
     }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = "UTF-8"
+        options.release = 17
+    }
+
+    java { withSourcesJar() }
 }
