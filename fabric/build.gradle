@@ -5,6 +5,10 @@ architectury {
     fabric()
 }
 
+loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+}
+
 configurations {
     common
     shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
@@ -15,14 +19,15 @@ configurations {
 
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}+${mc_version}"
-    // Remove the next line if you don't want to depend on the API
+    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}+${rootProject.mc_version}"
     modApi "dev.architectury:architectury-fabric:${rootProject.architectury_version}"
-    modImplementation "dev.latvian.mods:kubejs-fabric:${rootProject.kubejs_version}"
-    modImplementation "dev.latvian.mods:rhino:${rootProject.rhino_version}"
+    modCompileOnly("dev.latvian.mods:kubejs-fabric:${rootProject.kubejs_version}")
 
-    common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${rootProject.rei_version}")
+    modCompileOnly("mezz.jei:jei-${rootProject.mc_version}-fabric:${rootProject.jei_version}")
+
+    common(project(path: ":common", configuration: "namedElements")) { transitive = false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive = false }
 }
 
 processResources {

@@ -1,0 +1,32 @@
+modLoader = "javafml"
+loaderVersion = "[43,)"
+license = "All rights reserved"
+[[mods]]
+modId = "perpetual_durability"
+version = "${file.jarVersion}"
+displayName = "Perpetual Durability"
+logoFile = "perpetual_durability.png"
+authors = "LadyLexxie"
+description = '''
+'''
+
+[[dependencies.perpetual_durability]]
+modId = "forge"
+mandatory = true
+versionRange = "[43,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.perpetual_durability]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.19.2,1.19.3)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.perpetual_durability]]
+modId = "architectury"
+mandatory = true
+versionRange = "[6.3.49,)"
+ordering = "AFTER"
+side = "BOTH"

@@ -2,9 +2,14 @@ architectury {
     common(rootProject.enabled_platforms.split(","))
 }
 
+loom {
+    accessWidenerPath = file("src/main/resources/perpetual_durability.accesswidener")
+}
+
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     modApi "dev.architectury:architectury:${rootProject.architectury_version}"
-    modImplementation "dev.latvian.mods:kubejs-fabric:${rootProject.kubejs_version}"
-    modImplementation "dev.latvian.mods:rhino:${rootProject.rhino_version}"
+    modCompileOnly("dev.latvian.mods:kubejs:${rootProject.kubejs_version}")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:${rootProject.rei_version}")
+    modCompileOnly("mezz.jei:jei-${rootProject.mc_version}-common:${rootProject.jei_version}")
 }
