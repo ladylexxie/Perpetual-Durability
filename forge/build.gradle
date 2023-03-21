@@ -5,15 +5,6 @@ architectury {
     forge()
 }
 
-loom {
-    accessWidenerPath = project(":common").loom.accessWidenerPath
-
-    forge {
-        convertAccessWideners = true
-        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
-    }
-}
-
 configurations {
     common
     shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
@@ -25,6 +16,7 @@ configurations {
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.mc_version}-${rootProject.forge_version}"
     modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
+    modApi("me.shedaniel.cloth:cloth-config-forge:${project.cloth_config_version}")
     modCompileOnly("dev.latvian.mods:kubejs-forge:${rootProject.kubejs_version}")
     modCompileOnly("mezz.jei:jei-${rootProject.mc_version}-forge:${rootProject.jei_version}") { transitive = false }
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.rei_version}")

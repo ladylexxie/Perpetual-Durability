@@ -1,32 +1,40 @@
 modLoader = "javafml"
 loaderVersion = "[43,)"
 license = "All rights reserved"
-[[mods]]
-modId = "perpetual_durability"
-version = "${file.jarVersion}"
-displayName = "Perpetual Durability"
 logoFile = "perpetual_durability.png"
-authors = "LadyLexxie"
-description = '''
-'''
+issueTrackerURL = "https://github.com/ladylexxie/Perpetual-Durability/issues"
 
-[[dependencies.perpetual_durability]]
+[[mods]]
+modId = "${mod_id}"
+version = "${file.jarVersion}"
+displayName = "${mod_name}"
+authors = "LadyLexxie"
+description = '''${mod_description}'''
+
+[[dependencies.${mod_id}]]
 modId = "forge"
 mandatory = true
 versionRange = "[43,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.perpetual_durability]]
+[[dependencies.${mod_id}]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.19.2,1.19.3)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.perpetual_durability]]
-modId = "architectury"
-mandatory = true
-versionRange = "[6.3.49,)"
-ordering = "AFTER"
+[[dependencies.${mod_id}]]
+modId = "kubejs"
+mandatory = false
+versionRange = "[${kubejs_version},)"
+ordering = "BEFORE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "roughlyenoughitems"
+mandatory = false
+versionRange = "[${rei_version},)"
+ordering = "BEFORE"
 side = "BOTH"

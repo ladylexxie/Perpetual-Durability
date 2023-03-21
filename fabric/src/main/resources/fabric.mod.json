@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "authors": [
+    "LadyLexxie"
+  ],
+  "contact": {
+    "sources": "https://github.com/ladylexxie/Perpetual-Durability"
+  },
+  "license": "${license}",
+  "icon": "perpetual_durability.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "ladylexxie.perpetual_durability.PerpetualDurabilityFabric"
+    ]
+  },
+  "depends": {
+    "fabric": ">=${fabric_api_version}",
+    "minecraft": ">=${mc_version}",
+    "java": ">=17"
+  },
+  "suggests": {
+    "roughlyenoughitems": ">=${rei_version}",
+    "kubejs": ">=${kubejs_version}"
+  }
+}

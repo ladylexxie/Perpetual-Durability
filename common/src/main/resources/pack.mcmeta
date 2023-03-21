@@ -1,6 +1,6 @@
 {
     "pack": {
-        "description": "Perpetual Durability",
+        "description": "${mod_name} resources",
         "pack_format": 10
     }
 }

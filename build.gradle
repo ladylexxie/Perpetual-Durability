@@ -39,7 +39,7 @@ allprojects {
             }
         }
         maven { url = "https://maven.blamejared.com/" }     // JEI
-        maven { url = "https://maven.shedaniel.me/" }       // REI
+        maven { url = "https://maven.shedaniel.me/" }       // REI / Cloth Config
         maven { url = "https://maven.parchmentmc.net/" }    // parchment
     }
 
