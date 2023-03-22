@@ -6,7 +6,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import ladylexxie.perpetual_durability.util.PUtils;
+import ladylexxie.perpetual_durability.util.PDUtils;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -43,7 +43,7 @@ public class PerpetuateCommand {
 			if( entity instanceof LivingEntity livingEntity ) {
 				ItemStack stack = livingEntity.getMainHandItem();
 				if( !stack.isEmpty() ) {
-					if( PUtils.canPerpetuate(stack) || forced) {
+					if( PDUtils.canPerpetuate(stack) || forced) {
 						stack.getOrCreateTag().putBoolean("Unbreakable", true);
 						stack.setDamageValue(0);
 						i++;

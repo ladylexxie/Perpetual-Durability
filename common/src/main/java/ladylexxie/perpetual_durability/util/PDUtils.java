@@ -14,13 +14,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class PUtils {
+public class PDUtils {
 	private static int timer = 255;
 	private static MutableComponent perpetualTooltip = Component.literal("");
 	private static final double interval = Math.PI / 128;
 	private static final YearMonth currentYearMonth = YearMonth.now();
 
-	private PUtils() { }
+	private PDUtils() { }
 
 	private static final List<String> modBlacklist = PerpetualDurability.COMMON_CONFIG.blacklist.modBlacklist;
 	private static final List<String> itemBlacklist = PerpetualDurability.COMMON_CONFIG.blacklist.itemBlacklist;

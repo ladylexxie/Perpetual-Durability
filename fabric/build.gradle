@@ -23,6 +23,9 @@ dependencies {
     modCompileOnly("dev.latvian.mods:kubejs-fabric:${rootProject.kubejs_version}")
 
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${rootProject.rei_version}")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rootProject.rei_version}")
+    modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.rei_version}")
+
     modCompileOnly("mezz.jei:jei-${rootProject.mc_version}-fabric:${rootProject.jei_version}")
 
     common(project(path: ":common", configuration: "namedElements")) { transitive = false }

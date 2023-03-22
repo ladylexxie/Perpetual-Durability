@@ -1,26 +1,28 @@
 package ladylexxie.perpetual_durability;
 
-import ladylexxie.perpetual_durability.config.PCommonConfig;
-import ladylexxie.perpetual_durability.config.PCommonConfigWrapper;
+import dev.architectury.event.events.client.ClientTooltipEvent;
+import dev.architectury.event.events.common.CommandRegistrationEvent;
+import ladylexxie.perpetual_durability.config.PDCommonConfig;
+import ladylexxie.perpetual_durability.config.PDCommonConfigWrapper;
+import ladylexxie.perpetual_durability.event.ItemTooltip;
+import ladylexxie.perpetual_durability.event.RegisterCommands;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.ResourceLocation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class PerpetualDurability implements ModInitializer {
-	public static final String ID = "perpetual_durability";
-	public static final String NAME = "Perpetual Durability";
-	public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
-	public static PCommonConfig COMMON_CONFIG;
+	public static PDCommonConfig COMMON_CONFIG;
 
 	@Override
 	public void onInitialize() {
-		AutoConfig.register(PCommonConfigWrapper.class, PartitioningSerializer.wrap(JanksonConfigSerializer::new));
-		COMMON_CONFIG = AutoConfig.getConfigHolder(PCommonConfigWrapper.class).getConfig().common;
+		AutoConfig.register(PDCommonConfigWrapper.class, PartitioningSerializer.wrap(JanksonConfigSerializer::new));
+		COMMON_CONFIG = AutoConfig.getConfigHolder(PDCommonConfigWrapper.class).getConfig().common;
+
+		ClientTooltipEvent.ITEM.register(ItemTooltip::onItemTooltip);
+		CommandRegistrationEvent.EVENT.register(RegisterCommands::onRegisterCommands);
 	}
 
-	public static ResourceLocation id( String path ) { return new ResourceLocation(ID, path); }
+	public static ResourceLocation id( String path ) { return new ResourceLocation(PDConstants.ID, path); }
 }

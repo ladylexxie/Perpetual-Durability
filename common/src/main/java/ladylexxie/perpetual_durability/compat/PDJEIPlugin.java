@@ -1,4 +1,4 @@
-package ladylexxie.perpetual_durability.integration;
+package ladylexxie.perpetual_durability.compat;
 
 import ladylexxie.perpetual_durability.PerpetualDurability;
 import mezz.jei.api.IModPlugin;
@@ -8,14 +8,14 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.resources.ResourceLocation;
 
 @JeiPlugin
-public class PerpetualDurabilityJEIPlugin implements IModPlugin {
+public class PDJEIPlugin implements IModPlugin {
 	@Override
 	public ResourceLocation getPluginUid() {
-		return new ResourceLocation(PerpetualDurability.ID, "main");
+		return PerpetualDurability.id("main");
 	}
 
 	@Override
 	public void registerRecipes( IRecipeRegistration recipeRegistration ) {
-		recipeRegistration.addRecipes(RecipeTypes.SMITHING, ApplyPerpetual.getRecipes());
+		recipeRegistration.addRecipes(RecipeTypes.SMITHING, CompatHelper.getPerpetuateRecipes(CompatHelper.XEI.JEI));
 	}
 }

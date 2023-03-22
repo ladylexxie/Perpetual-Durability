@@ -19,7 +19,7 @@ dependencies {
     modApi("me.shedaniel.cloth:cloth-config-forge:${project.cloth_config_version}")
     modCompileOnly("dev.latvian.mods:kubejs-forge:${rootProject.kubejs_version}")
     modCompileOnly("mezz.jei:jei-${rootProject.mc_version}-forge:${rootProject.jei_version}") { transitive = false }
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.rei_version}")
+    modLocalRuntime modCompileOnly("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.rei_version}")
 
     common(project(path: ":common", configuration: "namedElements")) { transitive = false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }

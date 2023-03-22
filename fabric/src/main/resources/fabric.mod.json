@@ -19,6 +19,12 @@
     ],
     "client": [
       "ladylexxie.perpetual_durability.PDClient"
+    ],
+    "jei_mod_plugin": [
+      "ladylexxie.perpetual_durability.compat.PDJEIPlugin"
+    ],
+    "rei_client": [
+      "ladylexxie.perpetual_durability.compat.PDREIPlugin"
     ]
   },
   "depends": {

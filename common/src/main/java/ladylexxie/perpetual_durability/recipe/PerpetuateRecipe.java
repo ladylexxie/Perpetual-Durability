@@ -1,7 +1,7 @@
 package ladylexxie.perpetual_durability.recipe;
 
-import ladylexxie.perpetual_durability.registry.PRegistry;
-import ladylexxie.perpetual_durability.util.PUtils;
+import ladylexxie.perpetual_durability.registry.PDRegistry;
+import ladylexxie.perpetual_durability.util.PDUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
@@ -21,8 +21,8 @@ public class PerpetuateRecipe extends UpgradeRecipe {
 		ItemStack input = inventory.getItem(0);
 		ItemStack addition = inventory.getItem(1);
 
-		if( !addition.is(PRegistry.TAG_PERPETUAL) ) return false;
-		if( !PUtils.canPerpetuate(input) ) return false;
+		if( !addition.is(PDRegistry.TAG_PERPETUAL) ) return false;
+		if( !PDUtils.canPerpetuate(input) ) return false;
 		return true;
 	}
 
@@ -35,6 +35,6 @@ public class PerpetuateRecipe extends UpgradeRecipe {
 	}
 
 	@Override public @NotNull ItemStack getResultItem() { return ItemStack.EMPTY; }
-	@Override public boolean isAdditionIngredient( ItemStack addition ) {	return addition.is(PRegistry.TAG_PERPETUAL); }
-	@Override public @NotNull RecipeSerializer<?> getSerializer() { return PRegistry.PERPETUATE.get(); }
+	@Override public boolean isAdditionIngredient( ItemStack addition ) {	return addition.is(PDRegistry.TAG_PERPETUAL); }
+	@Override public @NotNull RecipeSerializer<?> getSerializer() { return PDRegistry.PERPETUATE.get(); }
 }

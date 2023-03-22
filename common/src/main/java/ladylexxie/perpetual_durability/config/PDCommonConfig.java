@@ -1,6 +1,6 @@
 package ladylexxie.perpetual_durability.config;
 
-import ladylexxie.perpetual_durability.PerpetualDurability;
+import ladylexxie.perpetual_durability.PDConstants;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
@@ -8,8 +8,8 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 import java.util.ArrayList;
 import java.util.List;
 
-@Config(name = PerpetualDurability.ID )
-public class PCommonConfig implements ConfigData {
+@Config(name = PDConstants.ID )
+public class PDCommonConfig implements ConfigData {
 	public Blacklist blacklist = new Blacklist();
 
 	public static class Blacklist {

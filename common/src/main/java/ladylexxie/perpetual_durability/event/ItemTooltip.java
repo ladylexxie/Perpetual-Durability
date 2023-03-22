@@ -3,48 +3,41 @@ package ladylexxie.perpetual_durability.event;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
-import ladylexxie.perpetual_durability.config.PClientConfig;
-import ladylexxie.perpetual_durability.registry.PRegistry;
-import ladylexxie.perpetual_durability.util.PUtils;
+import ladylexxie.perpetual_durability.PDClient;
+import ladylexxie.perpetual_durability.registry.PDRegistry;
+import ladylexxie.perpetual_durability.util.PDUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber( value = Dist.CLIENT )
 public class ItemTooltip {
 	private static final Gson GSON = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
 
-	private static void showEnchantedBookWarning( ItemStack stack, List<Component> tooltip ) {
-		// Show a red warning if player somehow got the old enchanted book
+	private static void showEnchantedBookWarning( ItemStack stack, List<Component> tooltip, TooltipFlag tooltipFlag ) {
 		if( stack.getItem() != Items.ENCHANTED_BOOK ) return;
-		if( !PUtils.hasEnchant(stack, PRegistry.ENCHANTMENT_PERPETUAL.get()) ) return;
 		tooltip.add(Component.translatable("enchantment.perpetual_durability.perpetual.desc").withStyle(ChatFormatting.RED));
 	}
 
-	private static void showTagDescription( ItemStack stack, List<Component> tooltip ) {
-		// Show if the item can be used to create unbreakable items
-		if( !PClientConfig.TAG_TOOLTIP.get() ) return;
-		if( !stack.is(PRegistry.TAG_PERPETUAL) ) return;
+	private static void showTagDescription( ItemStack stack, List<Component> tooltip, TooltipFlag tooltipFlag ) {
+		if( !PDClient.CLIENT_CONFIG.tagTooltip ) return;
+		if( !stack.is(PDRegistry.TAG_PERPETUAL) ) return;
 		tooltip.add(Component.translatable("tooltip.perpetual_durability.perpetual.desc").withStyle(ChatFormatting.LIGHT_PURPLE));
 	}
 
-	private static void coloredName( ItemStack stack, List<Component> tooltip ) {
+	private static void coloredName( ItemStack stack, List<Component> tooltip, TooltipFlag tooltipFlag ) {
 		if( stack.hasTag() && !stack.getOrCreateTag().getBoolean("Unbreakable") ) return;
 
 		for( Component line : tooltip ) {
 			if( !line.getString().equals(Component.translatable("item.unbreakable").getString()) ) continue;
-			if( PClientConfig.COLORFUL_TOOLTIP.get() ) {
+			if( PDClient.CLIENT_CONFIG.colorfulTooltip ) {
 				String perpetual = Component.translatable("tooltip.perpetual_durability.perpetual.name").getString();
-				tooltip.set(tooltip.indexOf(line), PUtils.animateTextColor(perpetual));
+				tooltip.set(tooltip.indexOf(line), PDUtils.animateTextColor(perpetual));
 			} else {
 				tooltip.set(tooltip.indexOf(line), Component.translatable("tooltip.perpetual_durability.perpetual.name").withStyle(ChatFormatting.DARK_RED));
 			}
@@ -52,10 +45,9 @@ public class ItemTooltip {
 		}
 	}
 
-	private static void showDebugTags( ItemStack stack, List<Component> tooltip, ItemTooltipEvent event ) {
-		// Tags on tooltips
-		if( !PClientConfig.ENABLE_DEBUG_TAGS.get() ) return;
-		if( !event.getFlags().isAdvanced() ) return;
+	private static void showDebugTags( ItemStack stack, List<Component> tooltip, TooltipFlag tooltipFlag ) {
+		if( !PDClient.CLIENT_CONFIG.debug.enableDebugTags ) return;
+		if( !tooltipFlag.isAdvanced() ) return;
 		if( stack.getTags().findAny().isEmpty() ) return;
 
 		if( Screen.hasControlDown() ) {
@@ -71,10 +63,9 @@ public class ItemTooltip {
 		}
 	}
 
-	private static void showDebugNBT( ItemStack stack, List<Component> tooltip, ItemTooltipEvent event ) {
-		// NBT on tooltips
-		if( !PClientConfig.ENABLE_DEBUG_NBT.get() ) return;
-		if( !event.getFlags().isAdvanced() ) return;
+	private static void showDebugNBT( ItemStack stack, List<Component> tooltip, TooltipFlag tooltipFlag ) {
+		if( !PDClient.CLIENT_CONFIG.debug.enableDebugNbt ) return;
+		if( !tooltipFlag.isAdvanced() ) return;
 		if( !stack.hasTag() ) return;
 
 		if( Screen.hasAltDown() ) {
@@ -89,15 +80,11 @@ public class ItemTooltip {
 		}
 	}
 
-	@SubscribeEvent
-	public static void onItemTooltip( ItemTooltipEvent e ) {
-		List<Component> tooltip = e.getToolTip();
-		ItemStack itemStack = e.getItemStack();
-
-		showEnchantedBookWarning(itemStack, tooltip);
-		showTagDescription(itemStack, tooltip);
-		coloredName(itemStack, tooltip);
-		showDebugTags(itemStack, tooltip, e);
-		showDebugNBT(itemStack, tooltip, e);
+	public static void onItemTooltip( ItemStack stack, List<Component> tooltip, TooltipFlag tooltipFlag ) {
+		showEnchantedBookWarning(stack, tooltip, tooltipFlag);
+		showTagDescription(stack, tooltip, tooltipFlag);
+		coloredName(stack, tooltip, tooltipFlag);
+		showDebugTags(stack, tooltip, tooltipFlag);
+		showDebugNBT(stack, tooltip, tooltipFlag);
 	}
 }
