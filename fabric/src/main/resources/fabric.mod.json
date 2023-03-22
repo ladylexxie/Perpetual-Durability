@@ -10,12 +10,15 @@
   "contact": {
     "sources": "https://github.com/ladylexxie/Perpetual-Durability"
   },
-  "license": "${license}",
-  "icon": "perpetual_durability.png",
+  "license": "All rights reserved",
+  "icon": "assets/perpetual_durability/icon/perpetual_durability.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "ladylexxie.perpetual_durability.PerpetualDurabilityFabric"
+      "ladylexxie.perpetual_durability.PerpetualDurability"
+    ],
+    "client": [
+      "ladylexxie.perpetual_durability.PDClient"
     ]
   },
   "depends": {

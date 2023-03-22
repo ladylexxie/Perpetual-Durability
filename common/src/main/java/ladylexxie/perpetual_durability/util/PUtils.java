@@ -1,20 +1,15 @@
 package ladylexxie.perpetual_durability.util;
 
-import ladylexxie.perpetual_durability.config.PCommonConfig;
-import ladylexxie.perpetual_durability.registry.PRegistry;
+import ladylexxie.perpetual_durability.PerpetualDurability;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.awt.*;
 import java.time.Month;
 import java.time.YearMonth;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,23 +22,13 @@ public class PUtils {
 
 	private PUtils() { }
 
-	private static final List<String> modBlacklist = new ArrayList<>(PCommonConfig.MOD_BLACKLIST.get());
-	private static final List<String> itemBlacklist = new ArrayList<>(PCommonConfig.ITEM_BLACKLIST.get());
-	private static final List<String> tagsBlacklist = new ArrayList<>(PCommonConfig.TAGS_BLACKLIST.get());
-
-	public static ItemStack getItemStackFromID( ResourceLocation id ) { return getItemFromID(id).getDefaultInstance(); }
-	public static Item getItemFromID( ResourceLocation id ) { return ForgeRegistries.ITEMS.getValue(id); }
-
-	public static ResourceLocation getID( Item item ) { return ForgeRegistries.ITEMS.getKey(item); }
-	public static ResourceLocation getID( ItemStack stack ) { return getID(stack.getItem()); }
-
-	public static boolean hasEnchant( ItemStack stack, Enchantment enchantment ) { return stack.getAllEnchantments().containsKey(enchantment); }
-	public static void removeEnchant( ItemStack stack, Enchantment enchantment ){ stack.getEnchantmentTags().removeIf(filter -> filter.toString().contains(enchantment.getDescriptionId())); }
+	private static final List<String> modBlacklist = PerpetualDurability.COMMON_CONFIG.blacklist.modBlacklist;
+	private static final List<String> itemBlacklist = PerpetualDurability.COMMON_CONFIG.blacklist.itemBlacklist;
+	private static final List<String> tagsBlacklist = PerpetualDurability.COMMON_CONFIG.blacklist.tagBlacklist;
 
 	public static boolean canPerpetuate( ItemStack stack ) {
 		if( !stack.isDamageableItem() ) return false;
-		ResourceLocation id = getID(stack);
-		if( hasEnchant(stack, PRegistry.ENCHANTMENT_PERPETUAL.get()) ) return false;
+		ResourceLocation id = stack.getItem().arch$registryName();
 		if( modBlacklist.contains(id.getNamespace()) ) return false;
 		if( itemBlacklist.contains(id.toString()) ) return false;
 		Set<String> tagsBlacklistSet = new HashSet<>(tagsBlacklist);
