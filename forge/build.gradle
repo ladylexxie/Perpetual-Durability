@@ -27,16 +27,16 @@ dependencies {
 
 processResources {
     def toReplace = [
-            "version":project.version,
-            "mc_version":rootProject.mc_version,
-            "mod_id":rootProject.mod_id,
-            "mod_name":rootProject.mod_name,
-            "rei_version": rootProject.rei_version,
-            "jei_version":rootProject.jei_version,
-            "kubejs_version":rootProject.kubejs_version,
-            "architectury_version":rootProject.architectury_version,
-            "cloth_config_version":rootProject.cloth_config_version,
-            "mod_description":rootProject.mod_description
+            "version"             : project.version,
+            "mc_version"          : rootProject.mc_version,
+            "mod_id"              : rootProject.mod_id,
+            "mod_name"            : rootProject.mod_name,
+            "rei_version"         : rootProject.rei_version,
+            "jei_version"         : rootProject.jei_version,
+            "kubejs_version"      : rootProject.kubejs_version,
+            "architectury_version": rootProject.architectury_version,
+            "cloth_config_version": rootProject.cloth_config_version,
+            "mod_description"     : rootProject.mod_description
     ]
 
     inputs.properties toReplace
