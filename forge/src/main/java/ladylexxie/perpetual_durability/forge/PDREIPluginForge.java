@@ -1,4 +1,4 @@
-package ladylexxie.perpetual_durability.rei;
+package ladylexxie.perpetual_durability.forge;
 
 import ladylexxie.perpetual_durability.compat.PDREIPlugin;
 import me.shedaniel.rei.forge.REIPluginClient;

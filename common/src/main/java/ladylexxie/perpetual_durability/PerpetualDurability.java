@@ -9,14 +9,15 @@ import ladylexxie.perpetual_durability.event.RegisterCommands;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
-import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.ResourceLocation;
 
-public final class PerpetualDurability implements ModInitializer {
+public final class PerpetualDurability {
+	private static PerpetualDurability instance;
 	public static PDCommonConfig COMMON_CONFIG;
 
-	@Override
-	public void onInitialize() {
+	private PerpetualDurability() { }
+
+	public static void init() {
 		AutoConfig.register(PDCommonConfigWrapper.class, PartitioningSerializer.wrap(JanksonConfigSerializer::new));
 		COMMON_CONFIG = AutoConfig.getConfigHolder(PDCommonConfigWrapper.class).getConfig().common;
 

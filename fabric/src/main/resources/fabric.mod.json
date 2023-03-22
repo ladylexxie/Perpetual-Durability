@@ -15,10 +15,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "ladylexxie.perpetual_durability.PerpetualDurability"
+      "ladylexxie.perpetual_durability.PerpetualDurability::init"
     ],
     "client": [
-      "ladylexxie.perpetual_durability.PDClient"
+      "ladylexxie.perpetual_durability.PDClient::init"
     ],
     "jei_mod_plugin": [
       "ladylexxie.perpetual_durability.compat.PDJEIPlugin"
