@@ -16,7 +16,7 @@ configurations {
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.mc_version}-${rootProject.forge_version}"
     modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
-    modApi("me.shedaniel.cloth:cloth-config-forge:${project.cloth_config_version}")
+    modApi("me.shedaniel.cloth:cloth-config-forge:${rootProject.cloth_config_version}")
     modCompileOnly("dev.latvian.mods:kubejs-forge:${rootProject.kubejs_version}")
     modCompileOnly("mezz.jei:jei-${rootProject.mc_version}-forge:${rootProject.jei_version}") { transitive = false }
     modLocalRuntime modCompileOnly("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.rei_version}")
@@ -26,10 +26,22 @@ dependencies {
 }
 
 processResources {
-    inputs.property "version", project.version
+    def toReplace = [
+            "version":project.version,
+            "mc_version":rootProject.mc_version,
+            "mod_id":rootProject.mod_id,
+            "mod_name":rootProject.mod_name,
+            "rei_version": rootProject.rei_version,
+            "jei_version":rootProject.jei_version,
+            "kubejs_version":rootProject.kubejs_version,
+            "architectury_version":rootProject.architectury_version,
+            "cloth_config_version":rootProject.cloth_config_version,
+            "mod_description":rootProject.mod_description
+    ]
 
+    inputs.properties toReplace
     filesMatching("META-INF/mods.toml") {
-        expand "version": project.version
+        expand toReplace
     }
 }
 
