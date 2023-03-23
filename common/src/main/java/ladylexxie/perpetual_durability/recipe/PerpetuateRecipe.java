@@ -1,9 +1,7 @@
 package ladylexxie.perpetual_durability.recipe;
 
-import com.google.gson.JsonObject;
 import ladylexxie.perpetual_durability.registry.PDRegistry;
 import ladylexxie.perpetual_durability.util.PDUtils;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
@@ -39,16 +37,4 @@ public class PerpetuateRecipe extends UpgradeRecipe {
 	@Override public @NotNull ItemStack getResultItem() { return ItemStack.EMPTY; }
 	@Override public boolean isAdditionIngredient( ItemStack addition ) {	return addition.is(PDRegistry.TAG_PERPETUAL); }
 	@Override public @NotNull RecipeSerializer<?> getSerializer() { return PDRegistry.PERPETUATE.get(); }
-
-	public static class Serializer implements RecipeSerializer<PerpetuateRecipe> {
-		public PerpetuateRecipe fromJson(ResourceLocation id, JsonObject _unused) {
-			return new PerpetuateRecipe(id);
-		}
-
-		public PerpetuateRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf _unused) {
-			return new PerpetuateRecipe(id);
-		}
-
-		public void toNetwork(FriendlyByteBuf _unused, PerpetuateRecipe _unused2) { }
-	}
 }
