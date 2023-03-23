@@ -8,7 +8,7 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 import java.util.ArrayList;
 import java.util.List;
 
-@Config(name = PDConstants.ID )
+@Config(name = PDConstants.ID + "_server")
 public class PDCommonConfig implements ConfigData {
 	public Blacklist blacklist = new Blacklist();
 

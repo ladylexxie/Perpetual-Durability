@@ -6,7 +6,7 @@ import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
-@Config( name = PDConstants.ID )
+@Config(name = PDConstants.ID + "_client")
 public class PDClientConfig implements ConfigData {
 	@Comment( "Enable the recipe to show up in JEI/REI\ndefault: true" )
 	public boolean showRecipes = true;
