@@ -15,18 +15,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompatHelper {
-	public static List<UpgradeRecipe> getPerpetuateRecipes( XEI mod ) {
+	public static final String REI = "rei";
+	public static final String JEI = "jei";
+
+	/**
+	 * @param modID Mod ID to add for the recipe ID. Use with {@link CompatHelper#REI} or {@link CompatHelper#JEI}.
+	 * @return the list of recipes.
+	 */
+	public static List<UpgradeRecipe> getPerpetuateRecipes( String modID ) {
 		List<UpgradeRecipe> recipes = new ArrayList<>();
 		if( !PDClient.CLIENT_CONFIG.showRecipes ) return recipes;
 
-		List<Item> listOfDamageableItems = Registry.ITEM.stream().filter(Item::canBeDepleted).toList();
-
-		listOfDamageableItems.forEach(item -> {
+		Registry.ITEM.stream().filter(Item::canBeDepleted).forEach(item -> {
 			ResourceLocation itemID = item.arch$registryName();
 			ItemStack stack = new ItemStack(item);
 			if( !PDUtils.canPerpetuate(stack) ) return;
 
-			ResourceLocation recipeID = PerpetualDurability.id(mod + "/perpetuate/" + itemID.toString().replace(":", "."));
+			ResourceLocation recipeID = PerpetualDurability.id(modID + "/perpetuate/" + itemID.toString().replace(":", "."));
 			stack.getOrCreateTag().putBoolean("Unbreakable", true);
 			stack.setDamageValue(0);
 
@@ -35,17 +40,5 @@ public class CompatHelper {
 		});
 
 		return recipes;
-	}
-
-	public enum XEI {
-		REI("rei"),
-		JEI("jei");
-
-		private final String mod;
-
-		XEI( String id ) { this.mod = id; }
-
-		@Override
-		public String toString() { return mod; }
 	}
 }

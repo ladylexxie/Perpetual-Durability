@@ -6,6 +6,6 @@ import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 public class PDREIPlugin implements REIClientPlugin {
 	@Override
 	public void registerDisplays( DisplayRegistry registry ) {
-		CompatHelper.getPerpetuateRecipes(CompatHelper.XEI.REI).forEach(registry::add);
+		CompatHelper.getPerpetuateRecipes(CompatHelper.REI).forEach(registry::add);
 	}
 }

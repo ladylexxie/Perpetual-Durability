@@ -10,12 +10,10 @@ import net.minecraft.resources.ResourceLocation;
 @JeiPlugin
 public class PDJEIPlugin implements IModPlugin {
 	@Override
-	public ResourceLocation getPluginUid() {
-		return PerpetualDurability.id("main");
-	}
+	public ResourceLocation getPluginUid() { return PerpetualDurability.id("main"); }
 
 	@Override
 	public void registerRecipes( IRecipeRegistration recipeRegistration ) {
-		recipeRegistration.addRecipes(RecipeTypes.SMITHING, CompatHelper.getPerpetuateRecipes(CompatHelper.XEI.JEI));
+		recipeRegistration.addRecipes(RecipeTypes.SMITHING, CompatHelper.getPerpetuateRecipes(CompatHelper.JEI));
 	}
 }
