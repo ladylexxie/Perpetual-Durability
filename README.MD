@@ -1,5 +1,5 @@
 # Perpetual Durability
-================
+***
 ### A mod that adds a way to make items unbreakable
 
 [![Modrinth](https://img.shields.io/modrinth/dt/perpetual-durability?color=00AF5C&label=downloads&style=for-the-badge&logo=modrinth)](https://modrinth.com/mod/perpetual-durability)\
