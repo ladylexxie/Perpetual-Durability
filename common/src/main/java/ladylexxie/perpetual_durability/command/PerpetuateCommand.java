@@ -2,7 +2,6 @@ package ladylexxie.perpetual_durability.command;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
@@ -26,18 +25,20 @@ public class PerpetuateCommand {
 	public static void register( CommandDispatcher<CommandSourceStack> dispatcher ) {
 		dispatcher.register(Commands.literal("perpetuate")
 				.requires(p -> p.hasPermission(Commands.LEVEL_GAMEMASTERS))
-				.executes(c -> perpetuate(c.getSource(), ImmutableList.of(c.getSource().getEntityOrException()), ""))
-				.then(Commands.argument("force", StringArgumentType.word())
-						.executes(c -> perpetuate(c.getSource(), ImmutableList.of(c.getSource().getEntityOrException()), StringArgumentType.getString(c, "force")))
+				.executes(c -> perpetuate(c.getSource(), ImmutableList.of(c.getSource().getEntityOrException()), false))
+				.then(Commands.literal("force")
+						.executes(c -> perpetuate(c.getSource(), ImmutableList.of(c.getSource().getEntityOrException()), true))
 				)
 				.then(Commands.argument("targets", EntityArgument.entities())
-						.executes(c -> perpetuate(c.getSource(), EntityArgument.getEntities(c, "targets"), ""))
+						.executes(c -> perpetuate(c.getSource(), EntityArgument.getEntities(c, "targets"), false))
+						.then(Commands.literal("force")
+								.executes(c -> perpetuate(c.getSource(), EntityArgument.getEntities(c, "targets"), true))
+						)
 				)
 		);
 	}
 
-	public static int perpetuate( CommandSourceStack source, Collection<? extends Entity> entities, String arg ) throws CommandSyntaxException {
-		boolean forced = arg.equals("force");
+	public static int perpetuate( CommandSourceStack source, Collection<? extends Entity> entities, boolean forced ) throws CommandSyntaxException {
 		int i = 0;
 		for( Entity entity : entities ) {
 			if( entity instanceof LivingEntity livingEntity ) {
