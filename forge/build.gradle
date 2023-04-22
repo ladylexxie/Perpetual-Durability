@@ -6,7 +6,7 @@ architectury {
 }
 
 base {
-    archivesName.set("${mod_id}-${mc_version}-${mod_version}-forge")
+    archivesBaseName = "${mod_id}-${mc_version}-${mod_version}-forge"
 }
 
 configurations {

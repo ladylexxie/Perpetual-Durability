@@ -16,14 +16,55 @@ subprojects {
         minecraft "com.mojang:minecraft:${rootProject.mc_version}"
         mappings loom.officialMojangMappings()
     }
+    if (project.path != ':common' && false) {
+        apply plugin: "com.github.johnrengelman.shadow"
+
+        /*loom {
+            runConfigs.configureEach { ideConfigGenerated = true }
+            mods {
+                main { // to match the default mod generated for Forge
+                    sourceSet project.sourceSets.main
+                    sourceSet project(':common').sourceSets.main
+                }
+            }
+        }*/
+
+        configurations {
+            bundle {
+                canBeResolved(true)
+                canBeConsumed(false)
+            }
+
+            common
+            compileClasspath.extendsFrom common
+            runtimeClasspath.extendsFrom common
+        }
+
+        jar {
+            archiveClassifier.set "dev"
+        }
+
+        shadowJar {
+            archiveClassifier.set "dev-shadow"
+            configurations = [
+                    project.configurations.bundle
+            ]
+        }
+
+        remapJar {
+            dependsOn shadowJar
+            inputFile.set shadowJar.archiveFile
+            archiveBaseName.set "${rootProject.archives_base_name}-${project.name}"
+            archiveClassifier.set null
+        }
+    }
 }
 
 allprojects {
     apply plugin: "java"
     apply plugin: "architectury-plugin"
 
-    archivesBaseName = rootProject.mod_id
-    version = rootProject.mod_version
+//    version = rootProject.mod_version
     group = "ladylexxie.${mod_id}"
 
     repositories {
