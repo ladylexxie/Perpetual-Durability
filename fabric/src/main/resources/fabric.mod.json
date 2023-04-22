@@ -30,10 +30,13 @@
   "depends": {
     "fabric": ">=${fabric_api_version}",
     "minecraft": ">=${mc_version}",
+    "cloth-config": ">=${cloth_config_version}",
+    "architectury": ">=${architectury_version}",
     "java": ">=17"
   },
   "suggests": {
-    "roughlyenoughitems": ">=${rei_version}",
+    "roughlyenoughitems": ">=${jei_version}",
+    "jei": ">=${rei_version}",
     "kubejs": ">=${kubejs_version}"
   }
 }

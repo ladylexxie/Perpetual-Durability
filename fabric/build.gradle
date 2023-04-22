@@ -5,6 +5,10 @@ architectury {
     fabric()
 }
 
+base {
+    archivesName.set("${mod_id}-${mc_version}-${mod_version}-fabric")
+}
+
 configurations {
     common
     shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
@@ -34,14 +38,17 @@ dependencies {
 
 processResources {
     def toReplace = [
-            "version"           : project.version,
-            "mod_id"            : rootProject.mod_id,
-            "mod_name"          : rootProject.mod_name,
-            "mod_description"   : rootProject.mod_description,
-            "fabric_api_version": rootProject.fabric_api_version,
-            "mc_version"        : rootProject.mc_version,
-            "rei_version"       : rootProject.rei_version,
-            "kubejs_version"    : rootProject.kubejs_version
+            "version"             : project.version,
+            "mc_version"          : rootProject.mc_version,
+            "mod_id"              : rootProject.mod_id,
+            "mod_name"            : rootProject.mod_name,
+            "rei_version"         : rootProject.rei_version,
+            "jei_version"         : rootProject.jei_version,
+            "kubejs_version"      : rootProject.kubejs_version,
+            "architectury_version": rootProject.architectury_version,
+            "fabric_api_version"  : rootProject.fabric_api_version,
+            "cloth_config_version": rootProject.cloth_config_version,
+            "mod_description"     : rootProject.mod_description
     ]
 
     inputs.properties toReplace

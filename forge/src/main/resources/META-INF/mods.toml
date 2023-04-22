@@ -1,7 +1,7 @@
 modLoader = "javafml"
 loaderVersion = "[43,)"
 license = "All rights reserved"
-logoFile = "perpetual_durability.png"
+logoFile = "assets/perpetual_durability/icon/perpetual_durability.png"
 issueTrackerURL = "https://github.com/ladylexxie/Perpetual-Durability/issues"
 
 [[mods]]
