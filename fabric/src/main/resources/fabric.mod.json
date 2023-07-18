@@ -11,8 +11,6 @@
     "sources": "https://github.com/ladylexxie/Perpetual-Durability"
   },
   "license": "All rights reserved",
-  "icon": "assets/perpetual_durability/icon/perpetual_durability.png",
-  "environment": "*",
   "entrypoints": {
     "main": [
       "ladylexxie.perpetual_durability.PerpetualDurability::init"

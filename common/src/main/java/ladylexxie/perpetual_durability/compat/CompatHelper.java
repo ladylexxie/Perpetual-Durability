@@ -8,8 +8,9 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.UpgradeRecipe;
+import net.minecraft.world.item.crafting.SmithingRecipe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +23,10 @@ public class CompatHelper {
 	 * @param modID Mod ID to add for the recipe ID. Use with {@link CompatHelper#REI} or {@link CompatHelper#JEI}.
 	 * @return the list of recipes.
 	 */
-	public static List<UpgradeRecipe> getPerpetuateRecipes( String modID ) {
-		List<UpgradeRecipe> recipes = new ArrayList<>();
+	public static List<SmithingRecipe> getPerpetuateRecipes( String modID ) {
+		List<SmithingRecipe> recipes = new ArrayList<>();
 		if( !PDClient.CLIENT_CONFIG.showRecipes ) return recipes;
+
 
 		Registry.ITEM.stream().filter(Item::canBeDepleted).forEach(item -> {
 			ResourceLocation itemID = item.arch$registryName();
@@ -35,7 +37,7 @@ public class CompatHelper {
 			stack.getOrCreateTag().putBoolean("Unbreakable", true);
 			stack.setDamageValue(0);
 
-			UpgradeRecipe recipe = new UpgradeRecipe(recipeID, Ingredient.of(item), Ingredient.of(PDRegistry.TAG_PERPETUAL), stack);
+			SmithingRecipe recipe = new SmithingRecipe(recipeID, Ingredient.of(item), Ingredient.of(PDRegistry.TAG_PERPETUAL), stack);
 			recipes.add(recipe);
 		});
 
