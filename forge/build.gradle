@@ -5,10 +5,6 @@ architectury {
     forge()
 }
 
-base {
-    archivesBaseName = "${mod_id}-${mc_version}-${mod_version}-forge"
-}
-
 configurations {
     common
     shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
@@ -21,7 +17,6 @@ dependencies {
     forge "net.minecraftforge:forge:${rootProject.mc_version}-${rootProject.forge_version}"
     modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
     modApi("me.shedaniel.cloth:cloth-config-forge:${rootProject.cloth_config_version}")
-//    modCompileOnly("dev.latvian.mods:kubejs-forge:${rootProject.kubejs_version}")
     modCompileOnly("mezz.jei:jei-${rootProject.mc_version}-forge:${rootProject.jei_version}") { transitive = false }
     modLocalRuntime modCompileOnly("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.rei_version}")
 
@@ -33,14 +28,10 @@ processResources {
     def toReplace = [
             "version"             : project.version,
             "mc_version"          : rootProject.mc_version,
-            "mod_id"              : rootProject.mod_id,
-            "mod_name"            : rootProject.mod_name,
             "rei_version"         : rootProject.rei_version,
             "jei_version"         : rootProject.jei_version,
-            "kubejs_version"      : rootProject.kubejs_version,
             "architectury_version": rootProject.architectury_version,
-            "cloth_config_version": rootProject.cloth_config_version,
-            "mod_description"     : rootProject.mod_description
+            "cloth_config_version": rootProject.cloth_config_version
     ]
 
     inputs.properties toReplace
@@ -51,24 +42,32 @@ processResources {
 
 shadowJar {
     exclude "fabric.mod.json"
-    exclude "architectury.common.json"
 
     configurations = [project.configurations.shadowCommon]
-    classifier "dev-shadow"
+    setArchiveClassifier("dev-shadow")
 }
 
 remapJar {
     input.set shadowJar.archiveFile
     dependsOn shadowJar
-    classifier null
+    archiveBaseName.set "perpetual_durability-${mc_version}-${mod_version}-forge"
+    archiveClassifier.set null
 }
 
-jar { classifier "dev" }
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : "perpetual_durability",
+                "Specification-Vendor"    : "LadyLexxie",
+                "Specification-Version"   : project.version,
+                "Implementation-Title"    : "Perpetual Durability",
+                "Implementation-Version"  : project.version,
+                "Implementation-Vendor"   : "LadyLexxie",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
 
-sourcesJar {
-    def commonSources = project(":common").sourcesJar
-    dependsOn commonSources
-    from commonSources.archiveFile.map { zipTree(it) }
+    setArchiveClassifier("dev")
 }
 
 components.java {
