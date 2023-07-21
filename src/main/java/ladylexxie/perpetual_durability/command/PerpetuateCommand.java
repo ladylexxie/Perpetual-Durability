@@ -16,6 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Collection;
+import java.util.function.Supplier;
 
 public class PerpetuateCommand {
 	private static final DynamicCommandExceptionType ERROR_NOT_LIVING_ENTITY = new DynamicCommandExceptionType(e -> Component.translatable("commands.perpetual_durability.perpetuate.failed.entity", e));
@@ -55,9 +56,9 @@ public class PerpetuateCommand {
 		if( i == 0 ) {
 			throw ERROR_NOTHING_HAPPENED.create();
 		} else {
-			source.sendSuccess(entities.size() == 1
-							? Component.translatable("commands.perpetual_durability.perpetuate.success.single", entities.iterator().next().getDisplayName())
-							: Component.translatable("commands.enchant.success.multiple", entities.size()),
+			source.sendSuccess((Supplier<Component>) (entities.size() == 1
+										? Component.translatable("commands.perpetual_durability.perpetuate.success.single", entities.iterator().next().getDisplayName())
+										: Component.translatable("commands.enchant.success.multiple", entities.size())),
 					true
 			);
 

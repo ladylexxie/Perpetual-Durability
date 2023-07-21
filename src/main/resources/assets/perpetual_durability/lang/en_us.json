@@ -6,8 +6,6 @@
   "tooltip.perpetual_durability.debug_tags_item": "Item Tags:",
   "tooltip.perpetual_durability.debug_tags_block": "Block Tags:",
 
-  "enchantment.perpetual_durability.perpetual.desc": "This enchant has been removed. It is no longer obtainable.",
-
   "commands.perpetual_durability.perpetuate.success.multiple": "Perpetuated %s entities' items",
   "commands.perpetual_durability.perpetuate.success.single": "Perpetuated %s's item",
   "commands.perpetual_durability.perpetuate.failed": "Nothing changed. Targets either have no item in their hands or the tag could not be applied",

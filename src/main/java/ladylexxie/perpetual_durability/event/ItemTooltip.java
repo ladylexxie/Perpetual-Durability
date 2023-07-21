@@ -23,13 +23,6 @@ import java.util.List;
 public class ItemTooltip {
 	private static final Gson GSON = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
 
-	private static void showEnchantedBookWarning( ItemStack stack, List<Component> tooltip ) {
-		// Show a red warning if player somehow got the old enchanted book
-		if( stack.getItem() != Items.ENCHANTED_BOOK ) return;
-		if( !PUtils.hasEnchant(stack, PRegistry.ENCHANTMENT_PERPETUAL.get()) ) return;
-		tooltip.add(Component.translatable("enchantment.perpetual_durability.perpetual.desc").withStyle(ChatFormatting.RED));
-	}
-
 	private static void showTagDescription( ItemStack stack, List<Component> tooltip ) {
 		// Show if the item can be used to create unbreakable items
 		if( !PClientConfig.TAG_TOOLTIP.get() ) return;
@@ -94,7 +87,6 @@ public class ItemTooltip {
 		List<Component> tooltip = e.getToolTip();
 		ItemStack itemStack = e.getItemStack();
 
-		showEnchantedBookWarning(itemStack, tooltip);
 		showTagDescription(itemStack, tooltip);
 		coloredName(itemStack, tooltip);
 		showDebugTags(itemStack, tooltip, e);

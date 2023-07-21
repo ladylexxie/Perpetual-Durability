@@ -37,13 +37,9 @@ public class PUtils {
 	public static ResourceLocation getID( Item item ) { return ForgeRegistries.ITEMS.getKey(item); }
 	public static ResourceLocation getID( ItemStack stack ) { return getID(stack.getItem()); }
 
-	public static boolean hasEnchant( ItemStack stack, Enchantment enchantment ) { return stack.getAllEnchantments().containsKey(enchantment); }
-	public static void removeEnchant( ItemStack stack, Enchantment enchantment ){ stack.getEnchantmentTags().removeIf(filter -> filter.toString().contains(enchantment.getDescriptionId())); }
-
 	public static boolean canPerpetuate( ItemStack stack ) {
 		if( !stack.isDamageableItem() ) return false;
 		ResourceLocation id = getID(stack);
-		if( hasEnchant(stack, PRegistry.ENCHANTMENT_PERPETUAL.get()) ) return false;
 		if( modBlacklist.contains(id.getNamespace()) ) return false;
 		if( itemBlacklist.contains(id.toString()) ) return false;
 		Set<String> tagsBlacklistSet = new HashSet<>(tagsBlacklist);
